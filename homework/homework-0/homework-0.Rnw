@@ -9,10 +9,11 @@
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry} % easy page margins
 \usepackage[utf8]{inputenc} % editor uses utf-8 encoding
 \usepackage[T1]{fontenc} % T1 font pdf output
+\usepackage{lmodern} % Latin modern roman font
 \usepackage{amsmath, amsfonts, amssymb, amsthm} % math packages
 \usepackage[final]{microtype} % better microtypography
 \usepackage{graphicx} % for easier grahics handling
-\usepackage{hyperref} % to create hyperlinks
+\usepackage[hidelinks, colorlinks=true, linkcolor = blue, urlcolor = blue]{hyperref} % to create hyperlinks
 \usepackage{float} % tells floats to stay [H]ere!
 \usepackage{mdframed} % it's better than framed. knitr uses framed so settings won't conflict
 \usepackage{enumitem} % nice lists
@@ -22,14 +23,15 @@
 % Enter name and homework title here
 %==============================================================================
 \author{FirstName LastName}
-\title{Homework Title}
+\title{Homework 0}
+\date{Due August 31, 2021}
 
 %==============================================================================
 % Put title and author in PDF properties
 %==============================================================================
 \makeatletter % change interpretation of @
 \hypersetup{pdftitle={\@title},pdfauthor={\@author}}
-\makeatother % change back interpretation of @
+
 
 %==============================================================================
 % Header settings
@@ -42,6 +44,7 @@
 \makeatother
 \rhead{Page \thepage} % right header
 \setlength{\headheight}{13.6pt} % fixes minor warning
+\makeatother % change back interpretation of @
 
 %==============================================================================
 % List spacing
@@ -88,72 +91,46 @@ opts_chunk$set(cache = TRUE)
 @
 
 \begin{document}
+
+
+\maketitle
+
+\paragraph{Instructions.}
+
+This very short ``homework'' is meant to expose you to the Rnw format. It will be submitted but not graded. Before starting this assignment, please complete the setup described in Section 1 of \href{https://github.com/Katsevich-Teaching/stat-961-fall-2021/blob/main/getting-started/getting-started.pdf}{getting-started.pdf}. Then, follow the steps described in Section 2 as you work through this homework. Please submit your completed PDF to \href{https://www.gradescope.com/courses/284562}{Gradescope} as described in the aforementioned document. 
+
+\paragraph*{}
+
 %==============================================================================
 % Problem 1
 %==============================================================================
 \begin{prob}
-How to reference R values within \LaTeX\ using $\backslash Sexpr\{\}$.
+Write a function that takes as input two numbers and outputs their sum. Apply this function to the inputs (2,2) and print the output. Hint: See \href{https://r4ds.had.co.nz/functions.html}{Chapter 19} of R for Data Science if you need to review how functions are defined in R.
 \end{prob}
 %==============================================================================
 % Problem 1 Solution
 %==============================================================================
 \begin{sol}
-Here is some R code...
-
-<<message = FALSE, results = "hide">>=
-x <- c(1, 2, 3, 4, 5)
-y <- c(1, 2, 1.5, 3.5, 2.5)
-x.mean <- mean(x); x.sd <- sd(x)
-y.mean <- mean(y); y.sd <- sd(y)
+<<>>=
+# insert your code here
 @
-The mean for $x$ is $\Sexpr{x.mean}$ and the standard deviation is $\Sexpr{x.sd}$. The mean for $y$ is $\Sexpr{y.mean}$ and the standard deviation is $\Sexpr{y.sd}$.
 \end{sol}
 
 %==============================================================================
 % Problem 2
 %==============================================================================
 \begin{prob}
-How to add regression tables to \LaTeX\ with $xtable()$.
+Write down the statement of the Pythagorean Theorem as a display equation.
 \end{prob}
 %==============================================================================
 % Problem 2 Solution
 %==============================================================================
 \begin{sol}
-Run the regression using the data above...
 
-<<message = FALSE, results = "hide">>=
-reg <- lm(y ~ x)
-@
-<<echo = FALSE, results = 'asis'>>=
-library(xtable)
-print(xtable(reg, caption ="This is a caption", label ="regression_problem_2"), caption.placement = "top")
-@
+\begin{equation*}
+% insert your equation here
+\end{equation*}
 
-<<echo = FALSE, results = 'asis'>>=
-reg
-@
-\end{sol}
-
-%==============================================================================
-% Problem 3
-%==============================================================================
-\begin{prob}
-How to add pdf plots to \LaTeX\ using knitr.
-\end{prob}
-%==============================================================================
-% Problem 3 Solution
-%==============================================================================
-\begin{sol}
-Still using the same data...
-
-<<this-is-a-label, message=FALSE, fig.cap = 'This is a caption', fig.lp = 'fig:', fig.width = 5, fig.height = 4, fig.align = 'center', out.width = '3in', fig.pos = 'H'>>=
-data <- data.frame(cbind(y, x))
-library(ggplot2)
-ggplot(data = data, aes(x = x, y = y)) +
-    geom_point(shape = 1) +
-    geom_smooth(method = lm) +
-    ggtitle("This is a title")
-@
 \end{sol}
 
 \end{document}

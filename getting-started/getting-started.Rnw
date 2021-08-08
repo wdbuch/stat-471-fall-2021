@@ -1,0 +1,217 @@
+% (C) Brett Klamer - MIT - http://opensource.org/licenses/MIT
+% Please contact me if you find any errors or make improvements
+% Contact details at brettklamer.com
+
+\documentclass[11pt,letterpaper,english,oneside]{article} % article class is a standard class
+%==============================================================================
+%Load Packages
+%==============================================================================
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry} % easy page margins
+\usepackage[utf8]{inputenc} % editor uses utf-8 encoding
+\usepackage[T1]{fontenc} % T1 font pdf output
+\usepackage{lmodern} % Latin modern roman font
+\usepackage{amsmath, amsfonts, amssymb, amsthm} % math packages
+\usepackage[final]{microtype} % better microtypography
+\usepackage{graphicx} % for easier grahics handling
+\usepackage[hidelinks, colorlinks=true, linkcolor = blue, urlcolor = blue]{hyperref} % to create hyperlinks
+\usepackage{float} % tells floats to stay [H]ere!
+\usepackage{mdframed} % it's better than framed. knitr uses framed so settings won't conflict
+\usepackage{enumitem} % nice lists
+\usepackage{fancyhdr} % nice headers
+
+%==============================================================================
+% Enter name and homework title here
+%==============================================================================
+\title{Getting Started with STAT 471 \vspace{-0.3in}}
+
+%==============================================================================
+% Put title and author in PDF properties
+%==============================================================================
+\makeatletter % change interpretation of @
+\hypersetup{pdftitle={\@title},pdfauthor={\@author}}
+
+
+%==============================================================================
+% Header settings
+%==============================================================================
+\pagestyle{fancy} % turns on fancy header styles
+\fancyhf{} % clear all header and footer fields
+\makeatletter
+\lhead{\@author} % left header
+\chead{\@title} % center header
+\makeatother
+\rhead{Page \thepage} % right header
+\setlength{\headheight}{13.6pt} % fixes minor warning
+\makeatother % change back interpretation of @
+
+%==============================================================================
+% List spacing
+%==============================================================================
+\setlist[itemize]{parsep=0em} % fix itemize spacing
+\setlist[enumerate]{parsep=0em} % fix enumerate spacing
+
+%==============================================================================
+% Float spacing (changes spacing of tables, graphs, etc)
+%==============================================================================
+%\setlength{\textfloatsep}{3pt}
+%\setlength{\intextsep}{3pt}
+
+%==============================================================================
+% Define Problem and Solution Environments
+%==============================================================================
+\theoremstyle{definition} % use definition's look
+\newtheorem{problem}{Problem}
+\newtheorem{solution}{Solution}
+\mdfsetup{ % box margin fix for mdframe and how it plays with parskip and others.
+innerleftmargin=4pt,
+innerrightmargin=4pt,
+innertopmargin=-1pt,
+innerbottommargin=4pt}
+\newenvironment{prob}{\begin{mdframed}\begin{problem}\hspace{0pt}}{\end{problem}\end{mdframed}}
+\newenvironment{sol}{\begin{solution}\hspace{0pt}}{\end{solution}}
+
+%==============================================================================
+% set knitr options
+%==============================================================================
+% latex (change space before and after knitr kframe; based on framed package)
+\setlength{\OuterFrameSep}{0.3em}
+% R
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+# inline hook to process the output of \Sexpr{} statements to just 2 digits
+inline_hook <- function(x) {
+  if(is.numeric(x)) x <- round(x, 2)
+  paste(as.character(x), collapse=", ")
+}
+knit_hooks$set(inline = inline_hook)
+# cache all chunks
+opts_chunk$set(cache = TRUE)
+@
+
+\begin{document}
+
+
+\maketitle
+
+\section{Setup}
+
+\paragraph{R and RStudio setup.}
+
+\begin{enumerate}
+\item If you do not have R and/or RStudio installed, download and install these softwares by following the instructions \href{https://rstudio-education.github.io/hopr/starting.html}{here}. If you do have RStudio installed, update it to the latest version by opening RStudio and clicking \texttt{Help} -> \texttt{Check for Updates}. If you do have R installed, update it to the latest version by following the instructions \href{https://bootstrappers.umassmed.edu/bootstrappers-courses/courses/rCourse/Additional_Resources/Updating_R.html#updating-r}{here}. Open RStudio.
+\item Install packages for compiling reports by entering the following commands at the console (labeled B in Figure~\ref{fig:rstudio}):
+<<eval=FALSE>>=
+install.packages("knitr")
+install.packages("xtable")
+install.packages("tinytex")
+tinytex::install_tinytex() 
+@
+\item If you are on a Windows machine, go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Terminal}. In the drop down box for \texttt{New terminals open with}, select ``Git Bash''.
+\item Go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Sweave} on Windows or \texttt{RStudio} -> \texttt{Preferences} -> \texttt{Sweave} on Mac and select the options pictured in Figure~\ref{fig:sweave-options}.
+\end{enumerate}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.85\textwidth]{RStudio.png}
+\caption{RStudio interface}
+\label{fig:rstudio}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = \textwidth]{sweave-options.png}
+\caption{Options for PDF generation.}
+\label{fig:sweave-options}
+\end{figure}
+
+\clearpage
+
+\paragraph{Git and Github setup.}
+
+Git and Github are version control and code sharing tools used ubiquitously in applied statistics and data science. In STAT 471, you will use these tools to obtain course materials as well as to complete assignments. If you are unfamiliar with these tools (familiarity is not a prerequisite for this course), please read the first three sections of \href{https://www.educative.io/blog/git-github-tutorial-beginners}{this webpage}. 
+
+Course materials are stored in a Github repository (course repository) called \href{https://github.com/katsevich-teaching/stat-471-fall-2021}{\texttt{stat-471-fall-2021}}, which also serves as the primary course webpage (the repository is private; see instructions below to gain access). You have read-only access to this repository. You will create a separate Github repository (personal repository) with the same name but under your personal Github account, which will contain your work in addition to all of the course materials available in the course repository. It is also private and other students will not have access to it. Both of these repositories will be linked to a folder named \texttt{stat-471-fall-2021} on your computer. See Figure~\ref{fig:git-github} to visualize the relationship among these three repositories.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = \textwidth]{git-github.png}
+\caption{Relationship among Git repositories on Github and on your computer.}
+\label{fig:git-github}
+\end{figure}
+
+Follow the instructions below to set up these repositories. 
+
+\begin{enumerate}
+\item Create an account on \href{https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=\%2F&source=header-home}{Github} if you do not already have one, and log into your account.
+\item Click the \href{https://classroom.github.com/g/Kbt0vB3h}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
+\item Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. 
+\item Create a folder on your computer called \texttt{stat-471-fall-2021}.
+\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
+\item Check if you have Git installed by typing
+<<eval=FALSE>>=
+git --version
+@
+in the Terminal. If you get an error message indicating that git does not exist, install it by following the instructions \href{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}{here}.
+\item To set up Git (if not already done so), type the following commands in the Terminal, using your name and email address:
+<<eval=FALSE>>=
+git config --global user.name "Your name here"
+git config --global user.email "your_email@example.com"
+@
+\item Change the directory to \texttt{stat-471-fall-2021}. In RStudio, you can do this by navigating to the \texttt{stat-471-fall-2021} directory in the ``Files'' pane (Figure~\ref{fig:rstudio}F), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E), clicking the down arrow next to the ``Terminal" tab, and clicking \texttt{Go to Current Directory}. 
+\item In the Terminal, type
+<<eval=FALSE>>=
+git clone https://github.com/katsevich-teaching/stat-471-fall-2021.git
+@
+This will copy the STAT 471 Github repository onto your local computer.
+  \item In the Terminal, type
+<<eval=FALSE>>=
+git remote set-url --push origin https://github.com/[USERNAME]/stat-471-fall-2021.git
+@
+Here, ``[USERNAME]'' should be replaced by your Github username. This command will tell Github that any changes you make will be synchronized to your personal repository  as opposed to the course repository.
+\item In the Terminal, type 
+<<eval=FALSE>>=
+git push
+@
+This will have the effect of copying the contents of the repository to your personal Github account. Go to \texttt{https://github.com/[USERNAME]/stat-471-fall-2021} and check that this operation succeeded.
+\end{enumerate}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = \textwidth]{github-new-repo.png}
+\caption{Creating a new Github repository for the class.}
+\label{fig:new-github-repo}
+\end{figure}
+
+
+
+\clearpage 
+
+\section{Homework assignments}
+
+\paragraph{Assignment format.} The homework assignment will be distributed as an Rnw document; see \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.Rnw}{homework-0.Rnw} for an example. This format facilitates the integration of LaTeX (for typesetting mathematical formulas) with R code (for statistical programming), producing a PDF report; see \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.pdf}{homework-0.pdf} for an example. Read more about Rnw format \href{http://edrub.in/ARE212/latexKnitr.html}{here}. For those unfamiliar with LaTeX, please browse \href{https://www.overleaf.com/learn}{this webpage}. Useful articles on this page are those under the heading ``mathematics'' as well as the \href{https://www.overleaf.com/learn/latex/Cross_referencing_sections,_equations_and_floats}{article} on cross-referencing. For those unfamiliar with R, please read Chapters 1-5, 7, 9, 10, 12, 15, 17-21 of \href{https://r4ds.had.co.nz/}{R for Data Science}. Those familiar with R should also browse these chapters to fill in any gaps.
+
+\paragraph{Assignment download, completion and submission.}
+
+The following steps should be carried out for each homework assignment. Work through these steps for Homework 0.
+
+\begin{itemize}
+\item \textbf{Download.} Homework assignments will be made available on the class Github repository (under the \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/homework/}{homework} folder). To download the assignment, navigate to the \texttt{stat-471-fall-2021} directory on your computer in the Terminal (either through RStudio or a separate Terminal window), as in step 5 of the section ``Git and Github setup'' above. Then, pull the latest version of the class repository from Github by typing
+<<eval=FALSE>>=
+git pull
+@  
+\noindent If the repository has changed on Github and on your computer, then Git will automatically merge these two sets of changes. In this case, Git will automatically open an editor to allow you to type an informative message about this merge. However, a default message is already present and you do not need to change it, so simply close this editor. The default editor Git uses is Vim, and to close it you can type ``:q'' and then press enter. 
+\textit{Note:} Other course materials (e.g. lecture notes) will also be distributed via the course Github. These materials should be downloaded using the same process as above.
+\item \textbf{Complete.} Open RStudio. Navigate to the directory (e.g. \texttt{homework-0/}) containing the homework assignment in the files pane (Figure~\ref{fig:rstudio}F). Click \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E). Then, click on the Rnw file (e.g. \texttt{homework-0.Rnw}) to open it in the RStudio editor. Select ``R Sweave'' from the menu in the bottom right-hand corner of the editor pane (Figure~\ref{fig:rstudio}A). Change ``FirstName LastName'' to your first and last name. Work through the problems in the assignment, keeping the problem statements as they are and updating only the solutions between $\backslash$\texttt{begin\{sol\}} and $\backslash$\texttt{end\{sol\}}. When you make changes to the Rnw file, click ``Compile PDF'' near the top of the editor pane (Figure~\ref{fig:rstudio}D) to update the PDF output file. It is convenient to place the RStudio and PDF preview windows side by side. To save your work, periodically \textit{commit} it to Git by typing
+<<eval=FALSE>>=
+git add --all
+git commit -m "[commit message briefly describing the changes]"
+@  
+at the Terminal. 
+\item \textbf{Submit.} When you have completed your assignment, compile to PDF and commit one last time. Then, push the changes to your Github repository by typing the following command in the Terminal:
+<<eval=FALSE>>=
+git push
+@
+This will have the effect of synchronizing your files with your \textit{personal} Github repository (but not the class repository). Submit the compiled PDF to \href{https://www.gradescope.com/courses/284562}{Gradescope}. If you are unfamiliar with Gradescope, please watch \href{https://www.youtube.com/watch?v=oHvYPaYVhpo}{this brief video}.
+\end{itemize}
+
+\end{document}
