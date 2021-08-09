@@ -2,6 +2,7 @@
 *.gz
 *.log
 *.pages
+*.Rnw
 .Rproj.user
 */cache/
 .DS_Store

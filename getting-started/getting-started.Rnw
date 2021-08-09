@@ -102,26 +102,17 @@ opts_chunk$set(cache = TRUE)
 \item Install packages for compiling reports by entering the following commands at the console (labeled B in Figure~\ref{fig:rstudio}):
 <<eval=FALSE>>=
 install.packages("knitr")
-install.packages("xtable")
 install.packages("tinytex")
 tinytex::install_tinytex() 
 @
 \item If you are on a Windows machine, go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Terminal}. In the drop down box for \texttt{New terminals open with}, select ``Git Bash''.
-\item Go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Sweave} on Windows or \texttt{RStudio} -> \texttt{Preferences} -> \texttt{Sweave} on Mac and select the options pictured in Figure~\ref{fig:sweave-options}.
 \end{enumerate}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.85\textwidth]{RStudio.png}
+\includegraphics[width = \textwidth]{RStudio.png}
 \caption{RStudio interface}
 \label{fig:rstudio}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = \textwidth]{sweave-options.png}
-\caption{Options for PDF generation.}
-\label{fig:sweave-options}
 \end{figure}
 
 \clearpage
@@ -143,7 +134,7 @@ Follow the instructions below to set up these repositories.
 
 \begin{enumerate}
 \item Create an account on \href{https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=\%2F&source=header-home}{Github} if you do not already have one, and log into your account.
-\item Click the \href{https://classroom.github.com/g/Kbt0vB3h}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
+\item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
 \item Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. 
 \item Create a folder on your computer called \texttt{stat-471-fall-2021}.
 \item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
