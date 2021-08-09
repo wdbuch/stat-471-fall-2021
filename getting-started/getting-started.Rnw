@@ -99,7 +99,7 @@ opts_chunk$set(cache = TRUE)
 
 \begin{enumerate}
 \item If you do not have R and/or RStudio installed, download and install these softwares by following the instructions \href{https://rstudio-education.github.io/hopr/starting.html}{here}. If you do have RStudio installed, update it to the latest version by opening RStudio and clicking \texttt{Help} -> \texttt{Check for Updates}. If you do have R installed, update it to the latest version by following the instructions \href{https://bootstrappers.umassmed.edu/bootstrappers-courses/courses/rCourse/Additional_Resources/Updating_R.html#updating-r}{here}. Open RStudio.
-\item Install packages for compiling reports by entering the following commands at the console (labeled B in Figure~\ref{fig:rstudio}):
+\item Install packages for compiling reports by entering the following commands at the console (labeled C in Figure~\ref{fig:rstudio}):
 <<eval=FALSE>>=
 install.packages("knitr")
 install.packages("tinytex")
@@ -137,7 +137,7 @@ Follow the instructions below to set up these repositories.
 \item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
 \item Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. 
 \item Create a folder on your computer called \texttt{stat-471-fall-2021}.
-\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
+\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}B; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
 \item Check if you have Git installed by typing
 <<eval=FALSE>>=
 git --version
@@ -148,7 +148,7 @@ in the Terminal. If you get an error message indicating that git does not exist,
 git config --global user.name "Your name here"
 git config --global user.email "your_email@example.com"
 @
-\item Change the directory to \texttt{stat-471-fall-2021}. In RStudio, you can do this by navigating to the \texttt{stat-471-fall-2021} directory in the ``Files'' pane (Figure~\ref{fig:rstudio}F), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E), clicking the down arrow next to the ``Terminal" tab, and clicking \texttt{Go to Current Directory}. 
+\item Change the directory to \texttt{stat-471-fall-2021}. In RStudio, you can do this by navigating to the \texttt{stat-471-fall-2021} directory in the ``Files'' pane (Figure~\ref{fig:rstudio}E), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D), clicking the down arrow next to the ``Terminal" tab, and clicking \texttt{Go to Current Directory}. 
 \item In the Terminal, type
 <<eval=FALSE>>=
 git clone https://github.com/katsevich-teaching/stat-471-fall-2021.git
@@ -179,7 +179,7 @@ This will have the effect of copying the contents of the repository to your pers
 
 \section{Homework assignments}
 
-\paragraph{Assignment format.} The homework assignment will be distributed as an Rnw document; see \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.Rnw}{homework-0.Rnw} for an example. This format facilitates the integration of LaTeX (for typesetting mathematical formulas) with R code (for statistical programming), producing a PDF report; see \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.pdf}{homework-0.pdf} for an example. Read more about Rnw format \href{http://edrub.in/ARE212/latexKnitr.html}{here}. For those unfamiliar with LaTeX, please browse \href{https://www.overleaf.com/learn}{this webpage}. Useful articles on this page are those under the heading ``mathematics'' as well as the \href{https://www.overleaf.com/learn/latex/Cross_referencing_sections,_equations_and_floats}{article} on cross-referencing. For those unfamiliar with R, please read Chapters 1-5, 7, 9, 10, 12, 15, 17-21 of \href{https://r4ds.had.co.nz/}{R for Data Science}. Those familiar with R should also browse these chapters to fill in any gaps.
+\paragraph{Assignment format.} The homework assignment will be distributed as an R Markdown document; see \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.Rmd}{homework-0.Rmd} for an example. This format facilitates the integration of code, results, and prose, producing a PDF report; see \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.pdf}{homework-0.pdf} for an example. Read more about Rmd format \href{https://r4ds.had.co.nz/r-markdown.html}{here}. 
 
 \paragraph{Assignment download, completion and submission.}
 
@@ -190,9 +190,9 @@ The following steps should be carried out for each homework assignment. Work thr
 <<eval=FALSE>>=
 git pull
 @  
-\noindent If the repository has changed on Github and on your computer, then Git will automatically merge these two sets of changes. In this case, Git will automatically open an editor to allow you to type an informative message about this merge. However, a default message is already present and you do not need to change it, so simply close this editor. The default editor Git uses is Vim, and to close it you can type ``:q'' and then press enter. 
+\noindent If the repository has changed on Github and on your computer, then Git will automatically merge these two sets of changes. In this case, Git will automatically open an editor to allow you to type an informative message about this merge. However, a default message is already present and you do not need to change it, so simply close this editor. The default editor Git uses is Vim, and to close it you can type \texttt{:q} and then press enter. 
 \textit{Note:} Other course materials (e.g. lecture notes) will also be distributed via the course Github. These materials should be downloaded using the same process as above.
-\item \textbf{Complete.} Open RStudio. Navigate to the directory (e.g. \texttt{homework-0/}) containing the homework assignment in the files pane (Figure~\ref{fig:rstudio}F). Click \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E). Then, click on the Rnw file (e.g. \texttt{homework-0.Rnw}) to open it in the RStudio editor. Select ``R Sweave'' from the menu in the bottom right-hand corner of the editor pane (Figure~\ref{fig:rstudio}A). Change ``FirstName LastName'' to your first and last name. Work through the problems in the assignment, keeping the problem statements as they are and updating only the solutions between $\backslash$\texttt{begin\{sol\}} and $\backslash$\texttt{end\{sol\}}. When you make changes to the Rnw file, click ``Compile PDF'' near the top of the editor pane (Figure~\ref{fig:rstudio}D) to update the PDF output file. It is convenient to place the RStudio and PDF preview windows side by side. To save your work, periodically \textit{commit} it to Git by typing
+\item \textbf{Complete.} Open RStudio. Navigate to the directory (e.g. \texttt{homework-0/}) containing the homework assignment in the files pane (Figure~\ref{fig:rstudio}E). Click \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D). Then, click on the Rmd file (e.g. \texttt{homework-0.Rmd}) to open it in the RStudio editor. Change ``FirstName LastName'' to your first and last name. Work through the problems in the assignment, keeping the problem statements as they are. When you make changes to the Rda file, click ``Knit'' near the top of the editor pane (Figure~\ref{fig:rstudio}A) to update the PDF output file. It is convenient to place the RStudio and PDF preview windows side by side. To save your work, periodically \textit{commit} it to Git by typing
 <<eval=FALSE>>=
 git add --all
 git commit -m "[commit message briefly describing the changes]"
