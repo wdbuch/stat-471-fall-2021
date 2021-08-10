@@ -135,9 +135,8 @@ Follow the instructions below to set up these repositories.
 \begin{enumerate}
 \item Create an account on \href{https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=\%2F&source=header-home}{Github} if you do not already have one, and log into your account.
 \item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
-\item Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. 
-\item Create a folder on your computer called \texttt{stat-471-fall-2021}.
-\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}B; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
+\item Navigate back to your Github profile (e.g. by clicking your icon in the upper-right corner and then clicking \texttt{Your profile}). Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. 
+\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
 \item Check if you have Git installed by typing
 <<eval=FALSE>>=
 git --version
@@ -148,12 +147,13 @@ in the Terminal. If you get an error message indicating that git does not exist,
 git config --global user.name "Your name here"
 git config --global user.email "your_email@example.com"
 @
-\item Change the directory to \texttt{stat-471-fall-2021}. In RStudio, you can do this by navigating to the \texttt{stat-471-fall-2021} directory in the ``Files'' pane (Figure~\ref{fig:rstudio}E), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D), clicking the down arrow next to the ``Terminal" tab, and clicking \texttt{Go to Current Directory}. 
+\item In the Terminal, change the directory to one within which you would like the \texttt{stat-471-fall-2021} directory to reside. For example, on my computer this directory is \texttt{/Users/ekatsevi/code/teaching}. To do so, you can directly type a \texttt{cd} command in the terminal, e.g. \texttt{cd /Users/ekatsevi/code/teaching}. Alternatively, in RStudio, you can do this by navigating to the directory in the ``Files'' pane (Figure~\ref{fig:rstudio}F), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E), clicking the down arrow next to the ``Terminal'' tab, and clicking \texttt{Go to Current Directory}.
 \item In the Terminal, type
 <<eval=FALSE>>=
 git clone https://github.com/katsevich-teaching/stat-471-fall-2021.git
 @
-This will copy the STAT 471 Github repository onto your local computer.
+This will copy the STAT 471 Github repository onto your local computer. It will reside in an automatically-created folder called \texttt{stat-471-fall-2021}.
+\item Change your directory to \texttt{stat-471-fall-2021}, similarly to step 7 above.
   \item In the Terminal, type
 <<eval=FALSE>>=
 git remote set-url --push origin https://github.com/[USERNAME]/stat-471-fall-2021.git
@@ -165,6 +165,11 @@ git push
 @
 This will have the effect of copying the contents of the repository to your personal Github account. Go to \texttt{https://github.com/[USERNAME]/stat-471-fall-2021} and check that this operation succeeded.
 \end{enumerate}
+
+\paragraph{Gradescope and Piazza setup.}
+
+Assignment submission will be through \href{https://www.gradescope.com/courses/285259}{Gradescope}. Please verify that you can log into this page. If not, please sign yourself up using the entry code \texttt{JB2XZX}. Please also sign yourself up for the \href{https://piazza.com/upenn/fall2021/stat471}{Piazza discussion forum}.
+
 
 \begin{figure}[h!]
 \centering
@@ -202,7 +207,7 @@ at the Terminal.
 <<eval=FALSE>>=
 git push
 @
-This will have the effect of synchronizing your files with your \textit{personal} Github repository (but not the class repository). Submit the compiled PDF to \href{https://www.gradescope.com/courses/284562}{Gradescope}. If you are unfamiliar with Gradescope, please watch \href{https://www.youtube.com/watch?v=oHvYPaYVhpo}{this brief video}.
+This will have the effect of synchronizing your files with your \textit{personal} Github repository (but not the class repository). Submit the compiled PDF to \href{https://www.gradescope.com/courses/285259}{Gradescope}. If you are unfamiliar with Gradescope, please watch \href{https://www.youtube.com/watch?v=oHvYPaYVhpo}{this brief video}.
 \end{itemize}
 
 \end{document}
