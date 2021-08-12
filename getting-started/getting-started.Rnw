@@ -135,7 +135,7 @@ Follow the instructions below to set up these repositories.
 \begin{enumerate}
 \item Create an account on \href{https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=\%2F&source=header-home}{Github} if you do not already have one, and log into your account.
 \item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
-\item Navigate back to your Github profile (e.g. by clicking your icon in the upper-right corner and then clicking \texttt{Your profile}). Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. 
+\item Navigate back to your Github profile (e.g. by clicking your icon in the upper-right corner and then clicking \texttt{Your profile}). Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. \textbf{Please make this repository private.}
 \item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
 \item Check if you have Git installed by typing
 <<eval=FALSE>>=
