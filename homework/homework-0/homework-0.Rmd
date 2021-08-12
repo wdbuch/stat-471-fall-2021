@@ -1,8 +1,12 @@
 ---
 title: 'STAT 471: Homework 0'
-author: "FirstName LastName"
+author: "Shuxiao Chen"
 date: 'Due: August 31, 2021'
 output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: '4'
   html_document:
     highlight: haddock
     number_sections: yes
@@ -10,10 +14,6 @@ output:
     toc: no
     toc_depth: 4
     toc_float: yes
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: '4'
 urlcolor: blue
 ---
 
@@ -27,7 +27,8 @@ This very short "homework" is meant to expose you to the R Markdown format. It w
 Evaluate the sum of 2 and 2 using an R code chunk. Then, comment on the answer you obtained. For those unfamiliar with R, read Section 4.1 [here](https://r4ds.had.co.nz/workflow-basics.html#coding-basics).
 
 ```{r}
-# R code here
+ans = 2 + 2
+print(ans)
 ```
 
-**Your answer in bold.**
+**2+2=`r ans`**
