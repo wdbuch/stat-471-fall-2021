@@ -10,7 +10,14 @@
 
 - [Piazza](https://piazza.com/upenn/fall2021/stat471) (discussion forum)
 
-## Course schedule
+## Course schedule (subject to change)
+
+Textbook abbreviations: 
+
+- ISLR = Introduction to Statistical Learning (editions 1 or 2)
+- ISLRv1 = Introduction to Statistical Learning, edition 1
+- ISLRv2 = Introduction to Statistical Learning, edition 2
+- R4DS = R for Data Science
 
 Date | Unit | Topic | Readings | Recording | Assignments
 :---|:---|:---|:---|:---|:---
@@ -54,12 +61,7 @@ Wed 12/8 | -- | -- | -- | -- | Homework 5 due at 11:59pm
 Thu 12/9 | -- | Course wrap-up | -- | TBA | --
 Sun 12/19 | -- | -- | -- | -- | Final project due at 11:59pm
 
-Key: 
 
-ISLR = Introduction to Statistical Learning (editions 1 or 2)
-ISLRv1 = Introduction to Statistical Learning, edition 1
-ISLRv2 = Introduction to Statistical Learning, edition 2
-R4DS = R for Data Science
 
 
 
