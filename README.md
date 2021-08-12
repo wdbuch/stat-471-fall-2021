@@ -14,15 +14,15 @@
 
 Date | Unit | Topic | Readings | Recording | Assignments
 :---|:---|:---|:---|:---|:---
-Tue 8/31 | 1. Intro to data mining | Intro to predictive modeling | TBA  |  TBA | --
-Wed 9/1 | -- | Computing tutorial (5:15-6:45pm) | -- | TBA | --
-Thu 9/2 | 1. Intro to data mining | Data wrangling | TBA | TBA | --
-Tue 9/7 | 1. Intro to data mining | Exploratory data analysis | TBA | TBA | --
-Thu 9/9 | 1. Intro to data mining | Linear regression | TBA | TBA | --
+Tue 8/31 | 1. Intro to data mining | Intro to predictive modeling | ISLR pp. 1-30  |  TBA | --
+Wed 9/1 | -- | Computing tutorial (5:15-6:45pm) | R4DS Ch. 1.4, 1.5, 1.6, 4, 6, 17, 20.1-20.5, 21.1-21.2, 26, 27, 30 | TBA | --
+Thu 9/2 | 1. Intro to data mining | Exploratory data analysis | R4DS Ch. 2,3,5,7 | TBA | --
+Tue 9/7 | 1. Intro to data mining | Data wrangling | R4DS Ch. 9-13,15 | TBA | --
+Thu 9/9 | 1. Intro to data mining | Linear regression | ISLR pp. 59-63, 69-74, 82-86 | TBA | --
 Tue 9/14 | 1. Intro to data mining | Unit 1 Review | -- | TBA | Quiz 1 in class
 Wed 9/15 | -- | -- | -- | -- | Homework 1 due at 11:59pm
-Thu 9/16 | 2. Tuning predictive models | Model complexity | TBA | TBA | --
-Tue 9/21 | 2. Tuning predictive models | Bias-variance trade-off | TBA | TBA | --
+Thu 9/16 | 2. Tuning predictive models | Model complexity | ISLRv1 pp. 265-268, 270-276 / ISLRv2 pp. 289-292, 294-300| TBA | --
+Tue 9/21 | 2. Tuning predictive models | Bias-variance trade-off | ISLR pp. 30-36 | TBA | --
 Thu 9/23 | 2. Tuning predictive models | Cross-validation | TBA | TBA | --
 Tue 9/28 | 2. Tuning predictive models | Classification | TBA | TBA | --
 Thu 9/30 | 2. Tuning predictive models | Unit 2 Review | -- | TBA | Quiz 2 in class
