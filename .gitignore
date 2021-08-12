@@ -1,7 +1,6 @@
 *.tex
 *.gz
 *.log
-*.pages
 *.Rnw
 .Rproj.user
 */cache/
