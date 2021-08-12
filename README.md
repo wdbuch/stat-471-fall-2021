@@ -10,6 +10,8 @@
 
 - [Piazza](https://piazza.com/upenn/fall2021/stat471) (discussion forum)
 
+- [Feedback](https://docs.google.com/forms/d/e/1FAIpQLSeWBcPbjJ6y7J3dxBDDk1iCQEZpgAG83G6ng1yCnNjfMbCAvQ/viewform?usp=sf_link) (provide feedback anonymously at any point during the semester)
+
 ## Course schedule (subject to change)
 
 Textbook abbreviations: 
