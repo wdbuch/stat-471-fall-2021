@@ -1,8 +1,12 @@
 ---
 title: 'STAT 471: Homework 0'
 author: "FirstName LastName"
-date: 'Due: August 31, 2021'
+date: 'Due: September 1, 2021'
 output:
+  pdf_document:
+    number_sections: yes
+    toc: no
+    toc_depth: '4'
   html_document:
     highlight: haddock
     number_sections: yes
@@ -10,17 +14,13 @@ output:
     toc: no
     toc_depth: 4
     toc_float: yes
-  pdf_document:
-    number_sections: yes
-    toc: yes
-    toc_depth: '4'
 urlcolor: blue
 ---
 
 
 # Instructions {-}
 
-This very short "homework" is meant to expose you to the R Markdown format. It will be submitted but not graded. Before starting this assignment, please complete the setup described in Section 1 of [getting-started.pdf](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/getting-started.pdf). Then, follow the steps described in Section 2 as you work through this homework. Please submit your completed PDF to [Gradescope](https://www.gradescope.com/courses/284561) as described in the aforementioned document. 
+This very short "homework" is meant to expose you to the R Markdown format. **It will be submitted but not graded.** Before starting this assignment, please complete the setup described in Section 1 of [getting-started.pdf](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/getting-started.pdf). Then, follow the steps described in Section 2 as you work through this homework. Please submit your completed PDF to [Gradescope](https://www.gradescope.com/courses/285259) as described in the aforementioned document. 
   
 # Using R as a calculator
 
