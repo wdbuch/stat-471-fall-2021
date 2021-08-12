@@ -12,6 +12,11 @@
 
 ## Course schedule
 
-Date | Topic | Readings | Recording | Assignments
-:---|:---|:---|:---|:---
-Test | Test | Test | Test | Test
+Date | Unit | Topic | Readings | Recording | Assignments
+:---|:---|:---|:---|:---|:---
+Tue 8/31 | 1. Intro to data mining | Intro to predictive modeling | TBA  |  TBA | --
+Wed 9/1 | -- | Computing tutorial (5:15-6:45pm) | -- | TBA | --
+Thu 9/2 | 1. Intro to data mining | Data wrangling | TBA | TBA | --
+Tue 9/7 | 1. Intro to data mining | Exploratory data analysis | TBA | TBA | --
+Thu 9/9 | 1. Intro to data mining | Linear regression | TBA | TBA | --
+Tue 9/14 | 1. Intro to data mining | Unit 1 Review | -- | TBA | Quiz 1 in class
