@@ -148,7 +148,7 @@ in the Terminal. If you get an error message indicating that git does not exist,
 git config --global user.name "Your name here"
 git config --global user.email "your_email@example.com"
 @
-\item Set up credential caching by following the instructions \href{https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git}{here}, so you don't need to enter your personal access token every time. Make sure to follow the instructions for your operating system. 
+\item Set up credential caching by following the instructions \href{https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git}{here}, so you don't need to enter your personal access token every time. Make sure to follow the instructions for your operating system. If prompted for authentication during the installation of GCM Core, please enter your computer password (as opposed to your Github password or personal access token).
 \item In the Terminal, change the directory to one within which you would like the \texttt{stat-471-fall-2021} directory to reside. For example, on my computer this directory is \texttt{/Users/ekatsevi/code/teaching}. To do so, you can directly type a \texttt{cd} command in the terminal, e.g. \texttt{cd /Users/ekatsevi/code/teaching}. Alternatively, in RStudio, you can do this by navigating to the directory in the \texttt{Files} pane (Figure~\ref{fig:rstudio}F), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E), clicking the down arrow next to the \texttt{Terminal} tab, and clicking \texttt{Go to Current Directory}.
 \item In the Terminal, type
 <<eval=FALSE>>=
