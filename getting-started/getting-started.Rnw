@@ -105,7 +105,6 @@ install.packages("knitr")
 install.packages("tinytex")
 tinytex::install_tinytex() 
 @
-\item If you are on a Windows machine, go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Terminal}. In the drop down box for \texttt{New terminals open with}, select \texttt{Git Bash}.
 \end{enumerate}
 
 \begin{figure}[h!]
@@ -137,19 +136,21 @@ Follow the instructions below to set up these repositories.
 \item Create a personal access token, if you do not already have one, by following these \href{https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token}{instructions}. In step 6 of those instructions, name the token \texttt{Github access}. In step 7, choose the option for the token not to expire. In step 8, check the boxes next to \texttt{repo}, \texttt{notifications}, \texttt{user}, and \texttt{delete\_repo}. When the token is created, copy it to your clipboard and/or a temporary file on your computer. 
 \item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click \texttt{Authorize Github Classroom}, join \texttt{STAT 471 Students (Fall 2021)}, and then navigate to the class Github repository. 
 \item Navigate back to your Github profile (e.g. by clicking your icon in the upper-right corner and then clicking \texttt{Your profile}). Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking \texttt{Repositories}, clicking the green \texttt{New} button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green \texttt{Create repository} button. \textbf{Please make this repository private.}
-\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
+\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}B; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems).
 \item Check if you have Git installed by typing
 <<eval=FALSE>>=
 git --version
 @
 in the Terminal. If you get an error message indicating that git does not exist, install it by following the instructions \href{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}{here}.
+\item If you are on a Windows machine, go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Terminal}. In the drop down box for \texttt{New terminals open with}, select \texttt{Git Bash}. Restart RStudio.
 \item To set up Git (if not already done so), type the following commands in the Terminal, using your name and email address:
 <<eval=FALSE>>=
 git config --global user.name "Your name here"
 git config --global user.email "your_email@example.com"
 @
-\item Set up credential caching by following the instructions \href{https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git}{here}, so you don't need to enter your personal access token every time. Make sure to follow the instructions for your operating system. If prompted for authentication during the installation of GCM Core, please enter your computer password (as opposed to your Github password or personal access token).
-\item In the Terminal, change the directory to one within which you would like the \texttt{stat-471-fall-2021} directory to reside. For example, on my computer this directory is \texttt{/Users/ekatsevi/code/teaching}. To do so, you can directly type a \texttt{cd} command in the terminal, e.g. \texttt{cd /Users/ekatsevi/code/teaching}. Alternatively, in RStudio, you can do this by navigating to the directory in the \texttt{Files} pane (Figure~\ref{fig:rstudio}F), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E), clicking the down arrow next to the \texttt{Terminal} tab, and clicking \texttt{Go to Current Directory}.
+Note that no messages will be printed as a result of these operations.
+\item (This step is not necessary for students with Windows systems who installed Git in step 6.) Set up credential caching by following the instructions \href{https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git}{here}, so you don't need to enter your personal access token every time. Make sure to follow the instructions for your operating system. If prompted for authentication during the installation of GCM Core, please enter your computer password (as opposed to your Github password or personal access token). 
+\item In the Terminal, change the directory to one within which you would like the \texttt{stat-471-fall-2021} directory to reside. For example, on my computer this directory is \texttt{/Users/ekatsevi/code/teaching}. To do so, you can directly type a \texttt{cd} command in the terminal, e.g. \texttt{cd /Users/ekatsevi/code/teaching}. Alternatively, in RStudio, you can do this by navigating to the directory in the \texttt{Files} pane (Figure~\ref{fig:rstudio}E), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D), clicking the down arrow next to the \texttt{Terminal} tab, and clicking \texttt{Go to Current Directory}.
 \item In the Terminal, type
 <<eval=FALSE>>=
 git clone https://github.com/katsevich-teaching/stat-471-fall-2021.git
@@ -193,7 +194,7 @@ Assignment submission will be through \href{https://www.gradescope.com/courses/2
 The following steps should be carried out for each homework assignment. Work through these steps for Homework 0.
 
 \begin{itemize}
-\item \textbf{Download.} Homework assignments will be made available on the class Github repository (under the \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/homework/}{homework} folder). To download the assignment, navigate to the \texttt{stat-471-fall-2021} directory on your computer in the Terminal (either through RStudio or a separate Terminal window), as in step 5 of the section \texttt{Git and Github setup} above. Then, \texttt{pull} the latest version of the class repository from Github by typing
+\item \textbf{Download.} Homework assignments will be made available on the class Github repository (under the \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/homework/}{homework} folder). To download the assignment, navigate to the \texttt{stat-471-fall-2021} directory on your computer in the Terminal (either through RStudio or a separate Terminal window), as in step 10 of the section \texttt{Git and Github setup} above. Then, \texttt{pull} the latest version of the class repository from Github by typing
 <<eval=FALSE>>=
 git pull
 @  
