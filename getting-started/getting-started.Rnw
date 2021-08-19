@@ -110,7 +110,7 @@ tinytex::install_tinytex()
 \begin{figure}[h!]
 \centering
 \includegraphics[width = \textwidth]{RStudio.png}
-\caption{RStudio interface}
+\caption{RStudio interface. Relevant parts are marked with white letters: A (\texttt{Knit} button), B (\texttt{Terminal}), C (\texttt{Console}), D (\texttt{More} button), E (\texttt{Files} pane).}
 \label{fig:rstudio}
 \end{figure}
 
