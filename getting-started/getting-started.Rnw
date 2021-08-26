@@ -105,13 +105,12 @@ install.packages("knitr")
 install.packages("tinytex")
 tinytex::install_tinytex() 
 @
-\item If you are on a Windows machine, go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Terminal}. In the drop down box for \texttt{New terminals open with}, select ``Git Bash''.
 \end{enumerate}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width = \textwidth]{RStudio.png}
-\caption{RStudio interface}
+\caption{RStudio interface. Relevant parts are marked with white letters: A (\texttt{Knit} button), B (\texttt{Terminal}), C (\texttt{Console}), D (\texttt{More} button), E (\texttt{Files} pane).}
 \label{fig:rstudio}
 \end{figure}
 
@@ -134,36 +133,40 @@ Follow the instructions below to set up these repositories.
 
 \begin{enumerate}
 \item Create an account on \href{https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=\%2F&source=header-home}{Github} if you do not already have one, and log into your account.
-\item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click ``Authorize Github Classroom'', join ``STAT 471 Students (Fall 2021)'', and then navigate to the class Github repository. 
-\item Navigate back to your Github profile (e.g. by clicking your icon in the upper-right corner and then clicking \texttt{Your profile}). Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking ``Repositories'', clicking the green ``New'' button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green ``Create repository'' button. \textbf{Please make this repository private.}
-\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}C; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems). 
+\item Create a personal access token, if you do not already have one, by following these \href{https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token}{instructions}. In step 6 of those instructions, name the token \texttt{Github access}. In step 7, choose the option for the token not to expire. In step 8, check the boxes next to \texttt{repo}, \texttt{notifications}, \texttt{user}, and \texttt{delete\_repo}. When the token is created, copy it to your clipboard and/or a temporary file on your computer. 
+\item Click the \href{https://classroom.github.com/g/tJwNRvs2}{course invitation link} (please do not share this link with students not in the class). Then, follow the prompts to click \texttt{Authorize Github Classroom}, join \texttt{STAT 471 Students (Fall 2021)}, and then navigate to the class Github repository. 
+\item Navigate back to your Github profile (e.g. by clicking your icon in the upper-right corner and then clicking \texttt{Your profile}). Create a repository named \texttt{stat-471-fall-2021} on your personal Github account by clicking \texttt{Repositories}, clicking the green \texttt{New} button, choosing the options pictured in Figure~\ref{fig:new-github-repo}, and clicking the green \texttt{Create repository} button. \textbf{Please make this repository private.}
+\item Open a Terminal either via RStudio (see Figure~\ref{fig:rstudio}B; works on any operating system) or by opening the Terminal application (works on Mac and Linux systems).
 \item Check if you have Git installed by typing
 <<eval=FALSE>>=
 git --version
 @
 in the Terminal. If you get an error message indicating that git does not exist, install it by following the instructions \href{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}{here}.
+\item If you are on a Windows machine, go to \texttt{Tools} -> \texttt{Global Options} -> \texttt{Terminal}. In the drop down box for \texttt{New terminals open with}, select \texttt{Git Bash}. Restart RStudio.
 \item To set up Git (if not already done so), type the following commands in the Terminal, using your name and email address:
 <<eval=FALSE>>=
 git config --global user.name "Your name here"
 git config --global user.email "your_email@example.com"
 @
-\item In the Terminal, change the directory to one within which you would like the \texttt{stat-471-fall-2021} directory to reside. For example, on my computer this directory is \texttt{/Users/ekatsevi/code/teaching}. To do so, you can directly type a \texttt{cd} command in the terminal, e.g. \texttt{cd /Users/ekatsevi/code/teaching}. Alternatively, in RStudio, you can do this by navigating to the directory in the ``Files'' pane (Figure~\ref{fig:rstudio}F), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}E), clicking the down arrow next to the ``Terminal'' tab, and clicking \texttt{Go to Current Directory}.
+Note that no messages will be printed as a result of these operations.
+\item (This step is not necessary for students with Windows systems who installed Git in step 6.) Set up credential caching by following the instructions \href{https://docs.github.com/en/get-started/getting-started-with-git/caching-your-github-credentials-in-git}{here}, so you don't need to enter your personal access token every time. Make sure to follow the instructions for your operating system. If prompted for authentication during the installation of GCM Core, please enter your computer password (as opposed to your Github password or personal access token). 
+\item In the Terminal, change the directory to one within which you would like the \texttt{stat-471-fall-2021} directory to reside. For example, on my computer this directory is \texttt{/Users/ekatsevi/code/teaching}. To do so, you can directly type a \texttt{cd} command in the terminal, e.g. \texttt{cd /Users/ekatsevi/code/teaching}. Alternatively, in RStudio, you can do this by navigating to the directory in the \texttt{Files} pane (Figure~\ref{fig:rstudio}E), clicking \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D), clicking the down arrow next to the \texttt{Terminal} tab, and clicking \texttt{Go to Current Directory}.
 \item In the Terminal, type
 <<eval=FALSE>>=
 git clone https://github.com/katsevich-teaching/stat-471-fall-2021.git
 @
-This will copy the STAT 471 Github repository onto your local computer. It will reside in an automatically-created folder called \texttt{stat-471-fall-2021}.
+You will be prompted for your Github username and password. In place of the password, paste the personal access token you created in step 2 above. This \texttt{clone} operation will copy the STAT 471 Github repository onto your local computer. It will reside in an automatically-created folder called \texttt{stat-471-fall-2021}.
 \item Change your directory to \texttt{stat-471-fall-2021}, similarly to step 7 above.
   \item In the Terminal, type
 <<eval=FALSE>>=
 git remote set-url --push origin https://github.com/[USERNAME]/stat-471-fall-2021.git
 @
-Here, ``[USERNAME]'' should be replaced by your Github username. This command will tell Github that any changes you make will be synchronized to your personal repository  as opposed to the course repository.
+Here, \texttt{[USERNAME]} should be replaced by your Github username. This command will tell Github that any changes you make will be synchronized to your personal repository  as opposed to the course repository.
 \item In the Terminal, type 
 <<eval=FALSE>>=
 git push
 @
-This will have the effect of copying the contents of the repository to your personal Github account. Go to \texttt{https://github.com/[USERNAME]/stat-471-fall-2021} and check that this operation succeeded.
+If you successfully set up credential caching in step 8 above, you will not be asked for authentication. In this case, you can delete the temporary file you may have created in step 2 above to store your token. The \texttt{push} operation will have the effect of copying the contents of the repository to your personal Github account. Go to \texttt{https://github.com/[USERNAME]/stat-471-fall-2021} and check that this operation succeeded.
 \end{enumerate}
 
 \paragraph{Gradescope and Piazza setup.}
@@ -174,7 +177,7 @@ Assignment submission will be through \href{https://www.gradescope.com/courses/2
 \begin{figure}[h!]
 \centering
 \includegraphics[width = \textwidth]{github-new-repo.png}
-\caption{Creating a new Github repository for the class.}
+\caption{Creating a new Github repository for the class. Please make sure to check \texttt{Private} to make the repository private! The \texttt{Owner} at the top will be your username instead of \texttt{ekatsevi-test}.}
 \label{fig:new-github-repo}
 \end{figure}
 
@@ -191,13 +194,13 @@ Assignment submission will be through \href{https://www.gradescope.com/courses/2
 The following steps should be carried out for each homework assignment. Work through these steps for Homework 0.
 
 \begin{itemize}
-\item \textbf{Download.} Homework assignments will be made available on the class Github repository (under the \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/homework/}{homework} folder). To download the assignment, navigate to the \texttt{stat-471-fall-2021} directory on your computer in the Terminal (either through RStudio or a separate Terminal window), as in step 5 of the section ``Git and Github setup'' above. Then, pull the latest version of the class repository from Github by typing
+\item \textbf{Download.} Homework assignments will be made available on the class Github repository (under the \href{https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/homework/}{homework} folder). To download the assignment, navigate to the \texttt{stat-471-fall-2021} directory on your computer in the Terminal (either through RStudio or a separate Terminal window), as in step 10 of the section \texttt{Git and Github setup} above. Then, \texttt{pull} the latest version of the class repository from Github by typing
 <<eval=FALSE>>=
 git pull
 @  
 \noindent If the repository has changed on Github and on your computer, then Git will automatically merge these two sets of changes. In this case, Git will automatically open an editor to allow you to type an informative message about this merge. However, a default message is already present and you do not need to change it, so simply close this editor. The default editor Git uses is Vim, and to close it you can type \texttt{:q} and then press enter. 
 \textit{Note:} Other course materials (e.g. lecture notes) will also be distributed via the course Github. These materials should be downloaded using the same process as above.
-\item \textbf{Complete.} Open RStudio. Navigate to the directory (e.g. \texttt{homework-0/}) containing the homework assignment in the files pane (Figure~\ref{fig:rstudio}E). Click \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D). Then, click on the Rmd file (e.g. \texttt{homework-0.Rmd}) to open it in the RStudio editor. Change ``FirstName LastName'' to your first and last name. Work through the problems in the assignment, keeping the problem statements as they are. When you make changes to the Rda file, click ``Knit'' near the top of the editor pane (Figure~\ref{fig:rstudio}A) to update the PDF output file. It is convenient to place the RStudio and PDF preview windows side by side. To save your work, periodically \textit{commit} it to Git by typing
+\item \textbf{Complete.} Open RStudio. Navigate to the directory (e.g. \texttt{homework-0/}) containing the homework assignment in the files pane (Figure~\ref{fig:rstudio}E). Click \texttt{More} -> \texttt{Set As Working Directory} (Figure~\ref{fig:rstudio}D). Then, click on the Rmd file (e.g. \texttt{homework-0.Rmd}) to open it in the RStudio editor. Change \texttt{FirstName LastName} to your first and last name. Work through the problems in the assignment, keeping the problem statements as they are. When you make changes to the Rda file, click \texttt{Knit} near the top of the editor pane (Figure~\ref{fig:rstudio}A) to update the PDF output file. It is convenient to place the RStudio and PDF preview windows side by side. To save your work, periodically \textit{commit} it to Git by typing
 <<eval=FALSE>>=
 git add --all
 git commit -m "[commit message briefly describing the changes]"
