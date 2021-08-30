@@ -17,14 +17,14 @@
 Textbook abbreviations: 
 
 - ISLR = Introduction to Statistical Learning (editions 1 or 2)
-- ISLRv1 = Introduction to Statistical Learning, edition 1
-- ISLRv2 = Introduction to Statistical Learning, edition 2
-- R4DS = R for Data Science
+- ISLRv1 = [Introduction to Statistical Learning, edition 1](https://static1.squarespace.com/static/5ff2adbe3fe4fe33db902812/t/6009dd9fa7bc363aa822d2c7/1611259312432/ISLR+Seventh+Printing.pdf)
+- ISLRv2 = [Introduction to Statistical Learning, edition 2](https://web.stanford.edu/~hastie/ISLRv2_website.pdf)
+- R4DS = [R for Data Science](https://r4ds.had.co.nz/)
 
 Date | Unit | Topic | Readings | Recording | Assignments
 :---|:---|:---|:---|:---|:---
 Tue 8/31 | 1. Intro to modern data mining | Intro to modern data mining | ISLR pp. 1-30  |  TBA | --
-Wed 9/1 | -- | Computing tutorial (5:15-6:45pm) | R4DS Ch. 1.4, 1.5, 1.6, 4, 6, 17, 20.1-20.5, 21.1-21.2, 26, 27, 30 | TBA | [Homework 0](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.pdf) due at 11:59pm
+Wed 9/1 | -- | Computing tutorial (5:15-6:45pm in JMHH 360) | R4DS Ch. 1.4, 1.5, 1.6, 4, 6, 17, 20.1-20.5, 21.1-21.2, 26, 27, 30 | TBA | [Homework 0](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.pdf) due at 11:59pm
 Tue 9/2 | 1. Intro to modern data mining | Data wrangling | R4DS Ch. 9-13,15 | TBA | --
 Thu 9/7 | 1. Intro to modern data mining | Exploratory data analysis | R4DS Ch. 2,3,5,7 | TBA | --
 Thu 9/9 | 1. Intro to modern data mining | Linear regression | ISLR pp. 59-63, 69-74, 82-86 | TBA | --
