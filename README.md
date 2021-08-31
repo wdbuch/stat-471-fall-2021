@@ -23,7 +23,7 @@ Textbook abbreviations:
 
 Date | Unit | Topic | Readings | Recording | Assignments
 :---|:---|:---|:---|:---|:---
-Tue 8/31 | 1. Intro to modern data mining | Intro to modern data mining | ISLR pp. 1-30  |  TBA | --
+Tue 8/31 | 1. Intro to modern data mining | Intro to modern data mining | ISLR pp. 1-30  |  [Link](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=0d0908a1-96ef-407e-9b7f-ad8e01169e8c) | --
 Wed 9/1 | -- | Computing tutorial (5:15-6:45pm in JMHH 360) | R4DS Ch. 1.4, 1.5, 1.6, 4, 6, 17, 20.1-20.5, 21.1-21.2, 26, 27, 30 | TBA | [Homework 0](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-0/homework-0.pdf) due at 11:59pm
 Tue 9/2 | 1. Intro to modern data mining | Data wrangling | R4DS Ch. 9-13,15 | TBA | --
 Thu 9/7 | 1. Intro to modern data mining | Exploratory data analysis | R4DS Ch. 2,3,5,7 | TBA | --
