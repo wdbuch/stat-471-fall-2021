@@ -87,6 +87,8 @@ library(cowplot)    # for side by side plots
 - How many rows and columns does the data have? 
 - Does this match up with the data description given above? 
 
+[Hint: If your working directory is `stat-471-fall-2021/homework/homework-1`, then you can use a *relative path* to access the data at `../../data/MLPayData_Total.csv`.]
+
 **Solution.**
 
 
@@ -129,7 +131,7 @@ Now that the data are in tidy format, we can explore them by producing visualiza
 
 - How are the metrics `payroll_aggregate_computed` and `pct_increase` reflected in the plot above, and how can we see that the two sets of teams identified above are the top three in terms of these metrics?
 
-[Hint: To compute payroll increase, it's useful to `pivot_wider` the data back to a format where different years are in different columns. Use `names_prefix = "payroll_` inside `pivot_wider` to deal with the fact column names cannot be numbers.]
+[Hint: To compute payroll increase, it's useful to `pivot_wider` the data back to a format where different years are in different columns. Use `names_prefix = "payroll_` inside `pivot_wider` to deal with the fact column names cannot be numbers. To add different horizontal lines to different facets, see [this webpage](https://community.rstudio.com/t/how-to-add-different-horizontal-lines-to-different-facets/20871).]
 
 **Solution.**
 

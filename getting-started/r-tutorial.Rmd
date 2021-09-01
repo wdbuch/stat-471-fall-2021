@@ -1,0 +1,311 @@
+---
+title: "R Tutorial"
+author: "Rachel Levin, Gantavya Pahwa"
+date: "September 1, 2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+## Installing Base R and RStudio
+
+See instructions on Canvas on how to download R and RStudio.
+
+## Navigating the RStudio interface
+
+```{r}
+4 + 5     # hit Ctrl + Enter (Cmd + Enter) to run a line of code to the console
+```
+
+## Creating an R script
+
+The first step is to set your working directory. You can do this by typing `setwd(filepath)` at the console, or clicking `Session` -> `Set Working Directory` -> `Choose Directory`, or navigating to your directory in the `Files` pane and then clicking `More` -> `Set as Working Directory`.
+
+To check your current directory, either run the command `getwd()` to the console or navigate to the Files window in the bottom right pane.
+
+## Installing and loading R packages
+
+Packages are a fundamental component of programming in R. R is an open source language, which enables programmers to create collections of functions, data sets, and other helpful tools that all R users can install and implement within their code. In this class, all of the data mining methods we will use will come from packages.
+
+```{r, results="hide"}
+#install.packages("ggplot2")   # only run ONCE ever to install the package
+library(ggplot2)               # run at the top of each new notebook to load the package
+```
+
+\newpage
+
+# Basic R Programming
+
+## Data types
+
+```{r, results="hide"}
+"a"     # character
+8       # numeric
+TRUE    # logical
+```
+
+```{r}
+TRUE + FALSE
+8 - TRUE
+```
+
+## Variable assignment
+
+```{r}
+x <- c(5,6,7)                   # a vector is a sequence of data elements of the same type
+y <- seq(from=1, to=3, by=1)    # alternatively, you can write this as seq(1,3)
+
+z <- c(x,y)                     # combine two vectors into a third vector
+z
+x + 3*y
+
+x.short <- c(5,6)
+x.short
+x.short + y                   # adding two vectors of unequal lengths will result in an error
+```
+
+## Subsetting
+
+Often times we will want to select one or multiple elements from a data storage object. There are several ways to do so.
+
+```{r}
+# Numerically
+z[1]
+z[c(1,3)]
+z[-1]
+
+# With logicals
+indices <- c(TRUE,TRUE,FALSE)
+x[indices]
+```
+
+## Operations on variables and vectors
+
+```{r}
+s <- c(1,4,9,16,25,36,49)
+sqrt(s)
+log(s)
+
+# It is often helpful to compare the lengths of vectors
+length(s)
+
+# You can also subset vectors based on conditional criteria
+s[s<10]
+```
+
+R has built-in functions such as `sqrt()` and `log()` work elementwise, meaning they perform the operation on each element of the input vector.
+
+R also has a variety of built-in functions for basic calculations and summary statistics.
+
+Examples: `sum()`, `max()`, `min()`, `mean()`, `sd()`, `any()`, `all()`
+
+\newpage
+
+## Random number generation
+
+```{r}
+rnorm(10)     # default parameters: mean=0, sd=1
+rexp(10)      # default parameters: lambda=1
+runif(10)     # default parameters: min=0, max=1
+```
+
+## Loops and iteration
+
+```{r}
+r = c()
+for (i in s){
+  print(sqrt(i))
+  r = c(r,sqrt(i))
+}
+r
+```
+## Matrices
+
+
+A matrix is a collection of data elements of the same type organized in a 2-dimensional structure. Create a matrix using the function `matrix()`, with parameters data (input data), nrow, ncol, and byrow.
+
+```{r}
+sample_data <- seq(1,12)                               # define data
+mat <- matrix(data=sample_data, nrow=3, ncol=4)        # default parameter byrow=FALSE
+dim(mat)                                               # matrix dimensions
+mat
+
+matrix(sample_data, nrow=3, ncol=4, byrow=TRUE)        # fill matrix row-wise
+```
+
+## Subsetting matrices
+
+```{r}
+mat[1,]       # subset row 1
+mat[,3]       # subset column 3
+```
+
+## Matrix-vector multiplication
+
+```{r}
+vec <- rep(x=1, times=4)       # create a vector with the number 1 repeated 4 times
+
+mat %*% vec                    # multiplication of the matrix and vector
+```
+
+Per matrix multiplication rules, make sure that the number of columns of the first matrix is equal to the number of rows of the second matrix (or vector).
+
+## Getting help
+
+```{r, results="hide"}
+?matrix
+help(matrix)
+```
+
+Other resources for getting help: Google, Piazza
+
+
+# R Markdown Overview
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. In STAT 471 we will output our code to PDF format for assignment submissions.
+
+R Markdown serves two main purposes:
+
+1. Lab notebook: keep track of work in progress, as an alternative to typing it in the
+console.
+
+2. Report generation: a nice way of integrating text, code, and results in a single report.
+
+In this class, we will be using R Markdown for the homework, midterm, and final project.
+
+
+## Embedding R Code
+
+Include R code in your R Markdown file using either code chunks or inline code.
+
+### Code Chunks and Inline Code
+
+```{r include=FALSE}
+vec <- "`r mean(a)`"
+```
+
+Embedding enables you to output both the code and its output. The output can be a printed result, a figure, or a table. You can also write code inline with your text, which is more reproducible than copying and pasting the result. If you change something about the calculation, then the output of the inline code will change as well. Wrap inline code in single tick marks (`).
+
+This is how to produce an R code chunk and inline code:
+````markdown
+
+`r ''````{r}
+a <- seq(1,5)
+a^2
+```
+
+The average of the vector a created above is `r vec`.
+````
+
+
+### Display Options
+
+The R package `knitr` provides options to adjust how you want to display your output.
+
+**echo**: whether to display code along with its results
+
+**warning**: whether to display warnings
+
+**cache**: whether to cache results for future renders. Note: caching does not check if the preceding code chunks have changed. To do smart caching (so that the chunks are re-run only if chunks on which they depend are changed), use the "dependson" chunk option. More information available at R4DS 27.4.4.
+
+**fig.width**: width in inches for plots created in the code chunk
+
+**fig.height**: height in inches for plots created in the code chunk
+
+## Document Organization
+
+All submitted R Markdown documents should contain a YAML header at the top of the file, including title, author, and date. This is what a YAML header looks like:
+
+```yaml
+---
+title: "Introduction to R Markdown"
+author: "[Insert Name Here]"
+date: "2021-01-20"
+---
+```
+
+In addition, good R coding practice includes frequent and clear use of headings throughout the document. The code
+
+```markdown
+# Header 1
+
+## Header 2
+
+### Header 3
+
+#### Header 4
+```
+
+produces
+
+# Header 1
+
+## Header 2
+
+### Header 3
+
+#### Header 4
+
+
+## Text Formatting
+
+You can also adjust text font. The code
+
+```markdown
+plain text
+
+*italics*
+
+**bold**
+```
+
+produces
+
+plain text
+
+*italics*
+
+**bold**
+
+## Inserting LaTeX Equations
+
+LaTeX is a document preparation system designed for neatly writing mathematical and statistical equations. You can either write an equation in line with the text (wrapped in single dollar signs), or alternatively on its own separate line (wrapped in double dollar signs).
+
+Inline: `$y_i = \beta_0 + \beta_1x_i + \varepsilon_i$ for $i = 1,...,n$` produces $y_i = \beta_0 + \beta_1x_i + \varepsilon_i$ for $i = 1,...,n$
+
+Separate Line:
+
+The code `$$ \sigma^2_x = \frac{1}{n-1} \sum_{i=1}^n (x_i - \mu)^2$$`
+
+produces
+
+$$ \sigma^2_x = \frac{1}{n-1} \sum_{i=1}^n (x_i - \mu)^2$$
+
+
+## Previewing and Exporting to PDF
+
+### Preview in Viewer Pane
+
+Select “Preview in Viewer Pane” option for convenient previewing of the document inside RStudio. Then, click “Knit to HTML” to run the whole document and see what it will look like.
+
+### Export to PDF
+
+Assignment submissions must be in PDF format. When you are ready to submit, click **Knit to PDF** to get a PDF output.
+
+When you click the Knit to PDF button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+To generate PDF output, we will need to install LaTeX. Run the following two commands in the console once:
+
+```{r, eval = FALSE}
+install.packages("tinytex")
+tinytex::install_tinytex()
+```
+
+## Additional Help
+
+Base R Cheatsheet: https://rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf
+
+R Markdown Cheatsheet: https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+
+
