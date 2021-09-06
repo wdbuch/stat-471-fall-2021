@@ -42,7 +42,7 @@ Tue 10/12 | 3. Regression-based methods | Ridge regression | ISLR Ch. 6.2.1, 6.2
 Thu 10/14 | -- | Fall break | -- | -- | --
 Tue 10/19 | 3. Regression-based methods | Lasso regression | ISLR Ch. 6.2.2 | TBA | --
 Thu 10/21 | 3. Regression-based methods | Unit 3 Review | -- | TBA | Quiz 3 in class
-Fri 10/22 | -- | Midterm review session (5:15-6:45pm) | -- | TBA | --
+Fri 10/22 | -- | Midterm review session (5:15-6:45pm in JMHH F85) | -- | TBA | --
 Sun 10/24 | -- | -- | -- | -- | Homework 3 due at 11:59pm
 Mon 10/25 | -- | -- | -- | -- | Midterm exam (7-9pm)
 Tue 10/26 | -- | Midterm solutions and final project intro | -- | TBA | --
