@@ -29,8 +29,8 @@ Thu 9/2 | 1. Intro to modern data mining | Linear regression | ISLR pp. 59-63, 6
 Tue 9/7 | 1. Intro to modern data mining | Data wrangling | R4DS Ch. 9-12,15 | [Programming material (R Markdown)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/unit-1/unit-1-lecture-3.Rmd);<br />[Programming material (PDF)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/unit-1/unit-1-lecture-3.pdf) | --
 Thu 9/9 | 1. Intro to modern data mining | Exploratory data analysis | R4DS Ch. 2,3,5,7 | TBA | --
 Tue 9/14 | 1. Intro to modern data mining | Unit 1 Review | -- | TBA | Quiz 1 in class;<br /> ([Quiz 1 from last semester](https://canvas.upenn.edu/courses/1597404/quizzes/2651229))
-Wed 9/15| -- | -- | -- | -- | [Homework 1](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-1/HW1.pdf) due at 11:59pm
 Thu 9/16 | 2. Tuning predictive models | Model complexity | ISLRv1 pp. 265-268, 270-276 / ISLRv2 pp. 289-292, 294-300| TBA | --
+Sun 9/19| -- | -- | -- | -- | [Homework 1](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-1/HW1.pdf) due at 11:59pm
 Tue 9/21 | 2. Tuning predictive models | Bias-variance trade-off | ISLR pp. 30-36 | TBA | --
 Thu 9/23 | 2. Tuning predictive models | Cross-validation | ISLR Ch. 5.1 | TBA | --
 Tue 9/28 | 2. Tuning predictive models | Classification | ISLRv1 pp. 127-130 / ISLRv2 pp. 129-132 | TBA | --

@@ -1,7 +1,7 @@
 ---
 title: 'STAT 471: Homework 1'
 author: 'Name'
-date: 'Due: September 15, 2021 at 11:59pm'
+date: 'Due: September 19, 2021 at 11:59pm'
 output:
   bookdown::pdf_document2:
     number_sections: yes
