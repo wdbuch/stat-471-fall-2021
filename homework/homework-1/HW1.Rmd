@@ -60,6 +60,8 @@ Compile your writeup to PDF and submit to [Gradescope](https://www.gradescope.co
 
 \newpage 
 
+Change 2
+
 # Case study: Major League Baseball {-}
 
 What is the relationship between payroll and wins among Major League Baseball (MLB) teams? In this homework, we'll find out by wrangling, exploring, and modeling the dataset in `data/MLPayData_Total.csv`, which contains the winning records and the payroll data of all 30 MLB teams from 1998 to 2014.
