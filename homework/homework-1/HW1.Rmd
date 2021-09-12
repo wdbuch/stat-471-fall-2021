@@ -27,7 +27,7 @@ options(scipen = 0, digits = 3)  # controls number of significant digits printed
 
 ## Setup {-} 
 
-Pull the latest version of this assignment from Github and set your working directory to `stat-471-fall-2021/` `homework/homework-1`. Consult the [getting started guide](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/getting-started.pdf) if you need to brush up on `R` or `Git`.
+Pull the very latest version of this assignment from Github and set your working directory to `stat-471-fall-2021/` `homework/homework-1`. Consult the [getting started guide](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/getting-started.pdf) if you need to brush up on `R` or `Git`.
 
 ## Collaboration {-}
 
