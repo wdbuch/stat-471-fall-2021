@@ -25,8 +25,6 @@ options(scipen = 0, digits = 3)  # controls number of significant digits printed
 
 # Instructions {-}
 
-Change 1.
-
 ## Setup {-} 
 
 Pull the latest version of this assignment from Github and set your working directory to `stat-471-fall-2021/` `homework/homework-1`. Consult the [getting started guide](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/getting-started.pdf) if you need to brush up on `R` or `Git`.
@@ -59,8 +57,6 @@ The point value for each problem sub-part is indicated. Additionally, the presen
 Compile your writeup to PDF and submit to [Gradescope](https://www.gradescope.com/courses/285259). 
 
 \newpage 
-
-Change 2
 
 # Case study: Major League Baseball {-}
 
