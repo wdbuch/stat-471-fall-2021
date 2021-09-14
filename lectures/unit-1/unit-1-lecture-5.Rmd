@@ -27,7 +27,7 @@ Welcome back to STAT 471! We are now in Unit 1 Lecture 5:
 knitr::include_graphics("figures/unit-1-lecture-5.png")
 ```
 
-In this lecture, we will review Unit 1, including data wrangling, manipulation, visualization, and linear regression modeling.
+In this lecture, we will review Unit 1, including data wrangling, manipulation, visualization, and linear regression modeling. We will do so by analyzing some data on tuberculosis from the WHO, available at https://www.who.int/teams/global-tuberculosis-programme/data.
 
 As usual, let's load the `tidyverse`:
 ```{r, message = FALSE}
