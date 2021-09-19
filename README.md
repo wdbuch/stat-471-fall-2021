@@ -35,7 +35,7 @@ Tue 9/21 | 2. Tuning predictive models | Bias-variance trade-off | ISLR pp. 30-3
 Thu 9/23 | 2. Tuning predictive models | Cross-validation | ISLR Ch. 5.1 | TBA | --
 Tue 9/28 | 2. Tuning predictive models | Classification | ISLRv1 pp. 127-130 / ISLRv2 pp. 129-132 | TBA | --
 Thu 9/30 | 2. Tuning predictive models | Unit 2 Review | -- | TBA | Quiz 2 in class
-Sun 10/3 | -- | -- | -- | -- | Homework 2 due at 11:59pm
+Mon 10/4 | -- | -- | -- | -- | [Homework 2](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-2/homework-2.pdf) due at 11:59pm
 Tue 10/5 | 3. Regression-based methods | Logistic regression | ISLR Ch. 4.3 | TBA | --
 Thu 10/7 | 3. Regression-based methods | Regression in high dimensions | ISLR Ch. 6.4 | TBA | --
 Tue 10/12 | 3. Regression-based methods | Ridge regression | ISLR Ch. 6.2.1, 6.2.3 | TBA | --
