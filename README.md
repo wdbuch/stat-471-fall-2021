@@ -44,7 +44,7 @@ Tue 10/19 | 3. Regression-based methods | Lasso regression | ISLR Ch. 6.2.2 | TB
 Thu 10/21 | 3. Regression-based methods | Unit 3 Review | -- | TBA | Quiz 3 in class
 Fri 10/22 | -- | Midterm review session (5:15-6:45pm in JMHH F85) | -- | TBA | --
 Sun 10/24 | -- | -- | -- | -- | Homework 3 due at 11:59pm
-Mon 10/25 | -- | -- | -- | -- | Midterm exam (7-9pm)
+Mon 10/25 | -- | -- | -- | -- | Midterm exam (7-9pm);<br />([Last year's midterm and solutions](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/midterm/midterm-spring-2021))
 Tue 10/26 | -- | Midterm solutions and final project intro | -- | TBA | --
 Thu 10/28 | -- | Buffer | TBA | TBA | --
 Tue 11/2 | 4. Tree-based methods | Growing decision trees | ISLRv1 pp. 303-307, 311-314 / ISLRv2 pp. 327-331, 335-338 | TBA | --
