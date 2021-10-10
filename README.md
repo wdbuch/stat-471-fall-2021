@@ -41,7 +41,7 @@ Thu 10/7 | 3. Regression-based methods | Regression in high dimensions | ISLR Ch
 Tue 10/12 | 3. Regression-based methods | Ridge regression | ISLR Ch. 6.2.1, 6.2.3 | TBA | --
 Thu 10/14 | -- | Fall break | -- | -- | --
 Tue 10/19 | 3. Regression-based methods | Lasso regression | ISLR Ch. 6.2.2 | TBA | --
-Thu 10/21 | 3. Regression-based methods | Unit 3 Review | -- | TBA | Quiz 3 in class
+Thu 10/21 | 3. Regression-based methods | Unit 3 Review | -- | TBA | Quiz 3 in class;<br />([Quiz 3 from last semester](https://canvas.upenn.edu/courses/1597404/quizzes/2651215))
 Fri 10/22 | -- | Midterm review session (5:15-6:45pm in JMHH F85) | -- | TBA | --
 Sun 10/24 | -- | -- | -- | -- | [Homework 3](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-3/homework-3.pdf) due at 11:59pm
 Mon 10/25 | -- | -- | -- | -- | Midterm exam (7-9pm);<br />([Last year's midterm and solutions](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/midterm/midterm-spring-2021))
