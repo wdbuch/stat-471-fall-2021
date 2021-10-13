@@ -9,8 +9,8 @@
 #                    if lambda defined, then for lasso it defaults to plotting 
 #                    variables with nonzero coefficients
 # 
-# Dependencies: The scales package must be installed.
-plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
+# Dependencies: The scales and glmnetUtils packages must be installed.
+plot_glmnet = function(glmnet_fit, data, lambda = NULL, features_to_plot = NULL){
   
   # extract coefficients
   if(!is.null(glmnet_fit$beta)){
@@ -24,6 +24,27 @@ plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
   
   # extract alpha
   alpha = glmnet_fit$call$alpha
+  
+  # extract formula
+  formula = glmnet_fit$call$formula
+  
+  # get model matrix
+  if(is.null(glmnet_fit$use.model.frame)){
+    print("Error: glmnet_fit must be obtained from glmnetUtils rather than glmnet!")
+    return()
+  } else{
+    if(glmnet_fit$use.model.frame){
+      X = glmnetUtils:::makeModelComponentsMF(formula, data)$x
+    } else{
+      X = glmnetUtils:::makeModelComponents(formula, data)$x
+    } 
+  }
+  
+  # translate coefficients to standardized scale
+  X_centered <- apply(X, 2, function(x) x - mean(x))
+  X_sd <- apply(X_centered, 2, function(x) sqrt(sum(x^2) / nrow(X)))
+  beta_hat_std = apply(beta_hat, 2, function(x) x*X_sd)
+  beta_hat_std_2 = diag(X_sd) %*% beta_hat
   
   # set lambda using one-standard-error-rule if cv.glmnet() was called
   if(is.null(lambda) & !is.null(glmnet_fit$lambda.1se)){
@@ -39,7 +60,7 @@ plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
     # if not specified but lambda is specified, plot coefficients with nonzero
     # coefficients at lambda = lambda
     if(!is.null(lambda)){
-      coefs = beta_hat[,glmnet_fit$lambda == lambda]
+      coefs = beta_hat_std[,glmnet_fit$lambda == lambda]
       if(alpha > 0){
         features_to_plot = features[coefs != 0]
       }
@@ -54,7 +75,7 @@ plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
       if(alpha > 0){
         # lasso and elastic net:
         #  first num_features_to_plot variables to enter lasso path
-        features_to_plot = apply(beta_hat, 
+        features_to_plot = apply(beta_hat_std, 
                                  1, 
                                  function(row)(min(c(Inf,which(row != 0))))) %>% 
           sort() %>% 
@@ -64,9 +85,9 @@ plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
         # ridge:
         #  largest num_features_to_plot variables at lambda = lambda
         if(!is.null(lambda)){
-          coefs = beta_hat[,glmnet_fit$lambda == lambda]
+          coefs = beta_hat_std[,glmnet_fit$lambda == lambda]
         } else{
-          coefs = beta_hat[,ncol(beta_hat)]
+          coefs = beta_hat_std[,ncol(beta_hat)]
         }
         features_to_plot = abs(coefs) %>% sort(decreasing = TRUE) %>% 
           head(num_features_to_plot) %>% names()
@@ -80,16 +101,16 @@ plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
   }
   
   # data frame to plot
-  df_to_plot = t(beta_hat) %>% 
+  df_to_plot = t(beta_hat_std) %>% 
     as.matrix() %>% 
     as_tibble() %>% 
     bind_cols(lambda = glmnet_fit$lambda) %>%
-    pivot_longer(-lambda, names_to = "feature", values_to = "beta_hat") %>%
-    mutate(feature_label = ifelse(feature %in% features_to_plot, feature, ""))
+    pivot_longer(-lambda, names_to = "Feature", values_to = "beta_hat_std") %>%
+    mutate(feature_label = ifelse(Feature %in% features_to_plot, Feature, ""))
   
   # split features into those that will be highlighted and those that won't
-  df_to_plot_highlight = df_to_plot %>% filter(feature %in% features_to_plot)
-  df_to_plot_other = df_to_plot %>% filter(!(feature %in% features_to_plot))
+  df_to_plot_highlight = df_to_plot %>% filter(Feature %in% features_to_plot)
+  df_to_plot_other = df_to_plot %>% filter(!(Feature %in% features_to_plot))
   
   # define reverse-log transformation
   reverselog_trans <- function(base = 10){
@@ -102,11 +123,13 @@ plot_glmnet = function(glmnet_fit, lambda = NULL, features_to_plot = NULL){
   
   # produce final plot
   df_to_plot_highlight %>% 
-    ggplot(aes(x = lambda, y = beta_hat, group = feature)) + 
+    ggplot(aes(x = lambda, y = beta_hat_std, group = Feature)) + 
     geom_line(data = df_to_plot_other, color = "darkgray") +
-    geom_line(aes(color = feature)) + 
+    geom_line(aes(color = Feature)) + 
     geom_vline(xintercept = lambda, linetype = "dashed") +
     scale_x_continuous(trans = reverselog_trans()) +  
-    ylab("Coefficient") + 
-    theme_bw()
+    xlab(expr(lambda)) +
+    ylab("Standardized Coefficient") + 
+    theme_bw() + 
+    theme(legend.position = "bottom")
 }
