@@ -131,5 +131,64 @@ plot_glmnet = function(glmnet_fit, data, lambda = NULL, features_to_plot = NULL)
     xlab(expr(lambda)) +
     ylab("Standardized Coefficient") + 
     theme_bw() + 
-    theme(legend.position = "bottom")
+    theme(legend.position = "bottom",
+          legend.title = element_blank())
+}
+
+# Description: Plot CV as a function of alpha for cva.glmnet
+#               
+# 
+# Arguments:
+# glmnet_fit:       fit object returned by cva.glmnet
+# 
+# Dependencies: The glmnetUtils package must be installed.
+plot_cva_glmnet = function(elnet_fit){
+  # extract the list of alpha values used
+  alpha = elnet_fit$alpha
+  
+  # extract the list of minimum CV errors
+  error = sapply(elnet_fit$modlist, function(mod) {min(mod$cvm)})
+  
+  # find the best alpha
+  best_alpha =  alpha[which.min(error)]
+  
+  # plot
+  tibble(alpha, error) %>%
+    ggplot(aes(x = alpha, y = error)) + 
+    geom_point() + 
+    geom_line() +
+    geom_vline(xintercept = best_alpha, linetype = "dashed") +
+    theme_bw() + 
+    labs(
+      x = expr(alpha),
+      y = "Minimum CV error"
+    )
+}
+
+# Description: Extract best elastic net fit over alpha
+#               
+# 
+# Arguments:
+# glmnet_fit:       fit object returned by cva.glmnet
+# 
+# Dependencies: The glmnetUtils package must be installed.
+extract_best_elnet = function(elnet_fit){
+  # extract the list of alpha values used
+  alpha = elnet_fit$alpha
+  
+  # extract the list of minimum CV errors
+  error = sapply(elnet_fit$modlist, function(mod) {min(mod$cvm)})
+  
+  # extract the best fit
+  out = elnet_fit$modlist[[which.min(error)]]
+  
+  # append the corresponding value of alpha
+  out$alpha = alpha[which.min(error)]
+  
+  # append use.model.frame and formula
+  out$use.model.frame = elnet_fit$use.model.frame
+  out$call$formula = elnet_fit$call$formula
+  
+  # return
+  out
 }
