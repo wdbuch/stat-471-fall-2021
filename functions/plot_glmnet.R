@@ -44,7 +44,6 @@ plot_glmnet = function(glmnet_fit, data, lambda = NULL, features_to_plot = NULL)
   X_centered <- apply(X, 2, function(x) x - mean(x))
   X_sd <- apply(X_centered, 2, function(x) sqrt(sum(x^2) / nrow(X)))
   beta_hat_std = apply(beta_hat, 2, function(x) x*X_sd)
-  beta_hat_std_2 = diag(X_sd) %*% beta_hat
   
   # set lambda using one-standard-error-rule if cv.glmnet() was called
   if(is.null(lambda) & !is.null(glmnet_fit$lambda.1se)){
@@ -133,6 +132,50 @@ plot_glmnet = function(glmnet_fit, data, lambda = NULL, features_to_plot = NULL)
     theme_bw() + 
     theme(legend.position = "bottom",
           legend.title = element_blank())
+}
+
+extract_std_coefs = function(glmnet_fit, data, lambda = NULL){
+  
+  # extract coefficients
+  if(!is.null(glmnet_fit$beta)){
+    beta_hat = glmnet_fit$beta
+  } else{
+    beta_hat = glmnet_fit$glmnet.fit$beta
+  }
+  
+  # extract feature names
+  features = rownames(beta_hat)
+  
+  # extract alpha
+  alpha = glmnet_fit$call$alpha
+  
+  # extract formula
+  formula = glmnet_fit$call$formula
+  
+  # get model matrix
+  if(is.null(glmnet_fit$use.model.frame)){
+    print("Error: glmnet_fit must be obtained from glmnetUtils rather than glmnet!")
+    return()
+  } else{
+    if(glmnet_fit$use.model.frame){
+      X = glmnetUtils:::makeModelComponentsMF(formula, data)$x
+    } else{
+      X = glmnetUtils:::makeModelComponents(formula, data)$x
+    } 
+  }
+  
+  # translate coefficients to standardized scale
+  X_centered <- apply(X, 2, function(x) x - mean(x))
+  X_sd <- apply(X_centered, 2, function(x) sqrt(sum(x^2) / nrow(X)))
+  beta_hat_std = diag(X_sd) %*% beta_hat
+  
+  # set lambda using one-standard-error-rule if cv.glmnet() was called
+  if(is.null(lambda) & !is.null(glmnet_fit$lambda.1se)){
+    lambda = glmnet_fit$lambda.1se
+  }
+  
+  tibble(feature = features,
+        coefficient = beta_hat_std[,which.min(abs(glmnet_fit$lambda-lambda))])
 }
 
 # Description: Plot CV as a function of alpha for cva.glmnet

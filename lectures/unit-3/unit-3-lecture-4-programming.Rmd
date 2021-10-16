@@ -40,7 +40,7 @@ crime_data_test = crime_data %>% filter(!(row_number() %in% train_samples))
 We call `cv.glmnet` on `crime_data_train`:
 ```{r}
 lasso_fit = cv.glmnet(violentcrimes.perpop ~ .,  # formula notation, as usual
-                      alpha = 1,                 # alpha = 1 for ridge
+                      alpha = 1,                 # alpha = 1 for lasso
                       nfolds = 10,               # number of folds
                       data = crime_data_train)   # data to run lasso on
 ```
@@ -73,16 +73,11 @@ To get the fitted coefficients at the selected value of lambda:
 coef(lasso_fit, s = "lambda.1se") %>% head()
 coef(lasso_fit, s = "lambda.min") %>% head()
 ```
-Note that these coefficient vectors are sparse. We can get a list of the nonzero coefficients as follows:
+Note that these coefficient vectors are sparse. We can get a list of the nonzero standardized coefficients as follows:
 ```{r}
-coef(lasso_fit, s = "lambda.1se") %>%
-  as.matrix() %>%
-  as.data.frame() %>%
-  rownames_to_column() %>% 
-  as_tibble() %>%
-  rename(Feature = rowname, Coefficient = s1) %>%
-  filter(Coefficient != 0, Feature != "(Intercept)") %>%
-  arrange(desc(abs(Coefficient)))
+beta_hat_std = extract_std_coefs(lasso_fit, crime_data_train)
+beta_hat_std
+beta_hat_std %>% filter(coefficient != 0)
 ```
 
 To visualize the fitted coefficients as a function of lambda, we can make a plot of the coefficients like we saw in class. To do this, we can use the `plot_glmnet` function, which by default shows a dashed line at the lambda value chosen using the one-standard-error rule:
