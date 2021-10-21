@@ -43,9 +43,9 @@ Thu 10/14 | -- | Fall break | -- | -- | --
 Tue 10/19 | 3. Regression-based methods | Lasso regression | ISLR Ch. 6.2.2 | [Slides (.pdf)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/unit-3/unit-3-lecture-4-slides.pdf); [Programming material (.rmd)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/unit-3/unit-3-lecture-4-programming.Rmd); [Programming material (.pdf)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/unit-3/unit-3-lecture-4-programming.pdf) | --
 Thu 10/21 | 3. Regression-based methods | Unit 3 Review | -- | TBA | [Quiz 3](https://canvas.upenn.edu/courses/1597404/assignments/9195949) in class;<br />([Quiz 3 from last semester](https://canvas.upenn.edu/courses/1597404/quizzes/2651215))
 Fri 10/22 | -- | Midterm review session (5:15-6:45pm in JMHH F85) | -- | TBA | --
-Sun 10/24 | -- | -- | -- | -- | [Homework 3](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-3/homework-3.pdf) due at 11:59pm
 Mon 10/25 | -- | -- | -- | -- | [Midterm exam](https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/midterm/midterm-fall-2021) (7-9pm in SHDH 350);<br />([Last year's midterm and solutions](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/midterm/midterm-spring-2021))
 Tue 10/26 | -- | Midterm solutions and final project intro | -- | TBA | --
+Wed 10/27 | -- | -- | -- | -- | [Homework 3](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-3/homework-3.pdf) due at 11:59pm
 Thu 10/28 | -- | Buffer | TBA | TBA | --
 Tue 11/2 | 4. Tree-based methods | Growing decision trees | ISLRv1 pp. 303-307, 311-314 / ISLRv2 pp. 327-331, 335-338 | TBA | --
 Thu 11/4 | 4. Tree-based methods | Tree pruning and bagging | ISLRv1 pp. 307-310, 314-317 / ISLRv2 pp. 331-334, 338-341 | TBA | --
