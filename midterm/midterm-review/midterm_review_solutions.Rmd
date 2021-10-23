@@ -64,7 +64,7 @@ library(tidyverse)                      # for everything else
 
 Let's load the data:
 ```{r, message = FALSE}
-readmission = read_csv("readmission_clean.csv")
+readmission = read_csv("../../data/readmission_clean.csv")
 readmission
 ```
 Each row corresponds to a hospital admission of a patient. There are 26 total variables, described below:
