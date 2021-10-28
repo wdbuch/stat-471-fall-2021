@@ -44,7 +44,7 @@ Tue 10/19 | 3. Regression-based methods | Lasso regression | ISLR Ch. 6.2.2 | [C
 Thu 10/21 | 3. Regression-based methods | Unit 3 Review | -- | [Class session (video)](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a64c5b04-c853-49bf-a5f1-adc0003815b4) | [Quiz 3](https://canvas.upenn.edu/courses/1597404/assignments/9195949) in class;<br />([Quiz 3 from last semester](https://canvas.upenn.edu/courses/1597404/quizzes/2651215))
 Fri 10/22 | -- | Midterm review session (5:15-6:45pm in JMHH F85) | -- | [Class session (video)](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=f9ffd566-a20b-4ca8-9ffe-adc80102a7e1); [Review materials](https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/midterm/midterm-review) | --
 Mon 10/25 | -- | -- | -- | -- | [Midterm exam](https://github.com/Katsevich-Teaching/stat-471-fall-2021/tree/main/midterm/midterm-fall-2021) (7-9pm in SHDH 350);<br />([Last year's midterm and solutions](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/midterm/midterm-spring-2021))
-Tue 10/26 | -- | Midterm solutions and final project intro | -- | TBA | --
+Tue 10/26 | -- | Midterm solutions and final project intro | -- | [Class session (video)](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=5ad4b412-8804-42cc-95c5-adca0104f3db) | --
 Wed 10/27 | -- | -- | -- | -- | [Homework 3](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-3/homework-3.pdf) due at 11:59pm
 Thu 10/28 | -- | Buffer | TBA | TBA | --
 Tue 11/2 | 4. Tree-based methods | Growing decision trees | ISLRv1 pp. 303-307, 311-314 / ISLRv2 pp. 327-331, 335-338 | TBA | --
