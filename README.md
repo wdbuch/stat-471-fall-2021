@@ -51,14 +51,14 @@ Tue 11/2 | 4. Tree-based methods | Growing decision trees | ISLRv1 pp. 303-307, 
 Thu 11/4 | 4. Tree-based methods | Tree pruning and bagging | ISLRv1 pp. 307-310, 314-317 / ISLRv2 pp. 331-334, 338-341 | TBA | --
 Tue 11/9 | 4. Tree-based methods | Random forests | ISLRv1 pp. 317-321 / ISLRv2 pp. 342-345| TBA | --
 Thu 11/11 | 4. Tree-based methods | Boosting | ISLR Ch. 8.2.3 | TBA | --
-Tue 11/16 | 4. Tree-based methods | Unit 4 Review | -- | TBA | Quiz 4 in class
-Wed 11/17 | -- | -- | -- | -- | Homework 4 due at 11:59pm
+Tue 11/16 | 4. Tree-based methods | Unit 4 Review | -- | TBA | Quiz 4 in class;<br />([Quiz 4 from last semester](https://canvas.upenn.edu/courses/1597404/quizzes/2651237))
+Wed 11/17 | -- | -- | -- | -- | [Homework 4](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-4/homework-4.pdf) due at 11:59pm
 Thu 11/18 | 5. Deep learning | Intro to deep learning | ISLRv2 Ch. 10.1, 10.2, 10.6| TBA | --
 Tue 11/23 | 5. Deep learning | Optimization and computation | ISLRv2 Ch. 10.7 | TBA | --
 Thu 11/25 | -- | Thanksgiving break | -- | -- | --
 Tue 11/30 | 5. Deep learning | Deep learning for image processing | ISLRv2 Ch. 10.3 | TBA | --
 Thu 12/2 | 5. Deep learning | Deep learning for text processing | ISLRv2 Ch. 10.4-10.5 | TBA | --
-Tue 12/7 | 5. Deep learning | Unit 5 Review | -- | TBA | Quiz 5 in class
+Tue 12/7 | 5. Deep learning | Unit 5 Review | -- | TBA | Quiz 5 in class;<br />(There was no Quiz 5 last semester.)
 Wed 12/8 | -- | -- | -- | -- | Homework 5 due at 11:59pm
 Thu 12/9 | -- | Course wrap-up | -- | TBA | --
 Sun 12/19 | -- | -- | -- | -- | Final project due at 11:59pm
