@@ -11,7 +11,6 @@ Today, we will be using the `rpart` package to fit regression and classification
 
 First, let's load some libraries:
 ```{r, message = FALSE}
-library(ISLR2)
 library(rpart)             # install.packages("rpart")
 library(rpart.plot)        # install.packages("rpart.plot")
 library(tidyverse)
@@ -21,7 +20,7 @@ library(tidyverse)
 
 We will be using the `Hitters` data from the `ISLR2` package. Let's take a look:
 ```{r, message = FALSE}
-Hitters = Hitters %>% 
+Hitters = ISLR2::Hitters %>% 
   as_tibble() %>% 
   filter(!is.na(Salary)) %>%   # remove NA values (in general not necessary)
   mutate(Salary = log(Salary)) # log-transform the salary
@@ -54,7 +53,6 @@ tree_fit = rpart(Salary ~ ., data = Hitters_train)
 We can plot the resulting tree using `rpart.plot`:
 ```{r}
 rpart.plot(tree_fit)
-tree_fit$variable.importance
 ```
 
 Does the first split point match what we predicted above? 
@@ -73,6 +71,7 @@ tree_fit$variable.importance
 
 The `control` argument of `rpart` can be specified to control how far down the tree is fit. In particular, the default for `control` is
 ```{r, eval = FALSE}
+# this code is not meant to be run
 control = rpart.control(minsplit = 20, minbucket = round(minsplit/3))
 ```
 
@@ -80,7 +79,8 @@ Here, `minsplit` is the minimum number of observations that must exist in a node
 
 Let's see what happens when we crank `minsplit` up to 80:
 ```{r}
-tree_fit_2 = rpart(Salary ~ ., control = rpart.control(minsplit = 80),
+tree_fit_2 = rpart(Salary ~ ., 
+                   control = rpart.control(minsplit = 80),
                    data = Hitters_train)
 rpart.plot(tree_fit_2)
 ```
@@ -95,10 +95,10 @@ results = tibble(Y = Hitters_test$Salary, Y_hat_1 = pred_1, Y_hat_2 = pred_2)
 results
 ```
 
-We can then extract the MSE of the two methods using `summarise`, as usual:
+We can then extract the RMSE of the two methods using `summarise`, as usual:
 ```{r}
-results %>% summarise(MSE_1 = mean((Y - Y_hat_1)^2), 
-                      MSE_2 = mean((Y-Y_hat_2)^2))
+results %>% summarise(RMSE_1 = sqrt(mean((Y - Y_hat_1)^2)), 
+                      RMSE_2 = sqrt(mean((Y-Y_hat_2)^2)))
 ```
 Which method performs better? Why might this be the case? 
 
