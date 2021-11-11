@@ -179,9 +179,9 @@ gbm_predictions = predict(gbm_fit_optimal, n.trees = optimal_num_trees,
                           newdata = Hitters_test)
 gbm_predictions
 ```
-We can compute the mean-squared prediction error as usual too:
+We can compute the root-mean-squared prediction error as usual too:
 ```{r}
-mean((gbm_predictions - Hitters_test$Salary)^2)
+sqrt(mean((gbm_predictions - Hitters_test$Salary)^2))
 ```
 
 # Boosting for classification
@@ -281,7 +281,7 @@ summary(gbm_fit_optimal, n.trees = optimal_num_trees, plotit = FALSE)
 For the partial dependence plots, it's useful to specify `type = "response"` so we can interpret the y axis on the probability scale:
 ```{r}
 plot(gbm_fit_optimal, i.var = "ChestPain", n.trees = optimal_num_trees, type = "response")
-plot(gbm_fit_optimal, i.var = "Age", n.trees = optimal_num_trees, type = "response")
+plot(gbm_fit_optimal, i.var = "Chol", n.trees = optimal_num_trees, type = "response")
 ```
 
 To make predictions, use the same syntax as before but with `type = "response"` to get predictions on the probability scale:
