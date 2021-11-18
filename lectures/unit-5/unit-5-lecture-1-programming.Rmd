@@ -21,11 +21,11 @@ source("../../functions/deep_learning_helpers.R")
 ```
 
 Next let's load the MNIST handwritten digit data:
-```{r, out.width = "50%"}
+```{r, out.width = "50%", message = FALSE}
 # load the data
 mnist <- dataset_mnist()
 
-# extra train and test data
+# extract train and test data
 x_train <- mnist$train$x
 g_train <- mnist$train$y
 x_test <- mnist$test$x
