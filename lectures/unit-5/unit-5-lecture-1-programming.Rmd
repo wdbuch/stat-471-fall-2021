@@ -1,0 +1,140 @@
+---
+title: 'Unit 5 Lecture 1: Deep Learning Preliminaries'
+date: "November 18, 2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+In this R demo, we'll get warmed up for deep learning by fitting a multi-class logistic regression to the MNIST handwritten digit data. The inputs are 28 pixel by 28 pixel images of handwritten digits (a total of 784 pixels), and the output is one of the ten categories 0, 1,..., 9. 
+
+First let's load some libraries:
+```{r, message = FALSE}
+library(keras)     # for deep learning
+library(tidyverse) # for everything else
+```
+
+Let's also load some helper functions written for this class:
+```{r}
+source("../../functions/deep_learning_helpers.R")
+```
+
+Next let's load the MNIST handwritten digit data:
+```{r, out.width = "50%"}
+# load the data
+mnist <- dataset_mnist()
+
+# extra train and test data
+x_train <- mnist$train$x
+g_train <- mnist$train$y
+x_test <- mnist$test$x
+g_test <- mnist$test$y
+
+# examine dimensions
+dim(x_train)
+dim(x_test)
+
+# plot a few of the digits
+p1 = plot_grayscale(x_train[1,,])
+plot(p1)
+
+p2 = plot_grayscale(x_train[2,,])
+plot(p2)
+
+p3 = plot_grayscale(x_train[3,,])
+plot(p3)
+```
+
+Now we *flatten* the images into vectors of length 784:
+```{r}
+# define some problem parameters
+num_pixels = dim(x_train)[2]*dim(x_train)[3]
+num_classes = 10
+max_intensity = 255
+  
+# flatten training and testing data
+x_train <- array_reshape(x_train, c(nrow(x_train), num_pixels))
+x_test <- array_reshape(x_test, c(nrow(x_test), num_pixels))
+
+# rescale pixel intensities to the unit interval
+x_train <- x_train / max_intensity
+x_test <- x_test / max_intensity
+
+# recode response labels using "one-hot" representation
+y_train <- to_categorical(g_train, num_classes)
+y_test <- to_categorical(g_test, num_classes)
+```
+
+Now, we can define the class of model we want to train (multi-class logistic model):
+```{r}
+modellr <- keras_model_sequential() %>%
+  layer_dense(input_shape = num_pixels,  # number of initial inputs
+              units = num_classes,       # number of outputs
+              activation = "softmax")    # type of activation function  
+```
+
+We can get a summary of this model as follows:
+```{r}
+summary(modellr)
+```
+
+Now we need to *compile* the model, which adds information to the object about which loss we want to use, which way we want to optimize the loss, and how we will evaluate validation error:
+```{r}
+modellr %>%                                    # note: modifying modellr in place
+  compile(loss = "categorical_crossentropy",   # which loss to use
+          optimizer = optimizer_rmsprop(),     # how to optimize the loss
+          metrics = c("accuracy"))             # how to evaluate the fit
+```
+
+Finally, we can train the model! Let's use a small number of epochs (gradient steps) so the run time is manageable.
+```{r}
+history = modellr %>% 
+  fit(x_train,                  # supply training features
+      y_train,                  # supply training responses
+      epochs = 5,               # an epoch is a gradient step
+      batch_size = 128,         # we will learn about batches in Lecture 2
+      validation_split = 0.2)   # use 20% of the training data for validation
+```
+
+The `history` object contains the progress during training, and can be plotted via
+```{r}
+# plot the history
+plot(history) + geom_line() + theme_bw()
+```
+
+We can get the fitted probabilities using the `predict()` function, and extract the classes with highest predicted probability using `k_argmax()`
+```{r}
+# get fitted probabilities
+modellr %>% predict(x_test) %>% head()
+
+# get predicted classes
+predicted_classes = modellr %>% predict(x_test) %>% k_argmax() %>% as.integer() 
+head(predicted_classes)
+```
+
+We can extract the misclassification error / accuracy manually:
+```{r}
+# misclassification error
+mean(predicted_classes != g_test)
+
+# accuracy
+mean(predicted_classes == g_test)
+```
+
+Or we can use a shortcut and call `evaluate`:
+```{r}
+evaluate(modellr, x_test, y_test, verbose = FALSE)
+```
+
+Finally, let's take a look at one of the misclassified digits:
+```{r, out.width = "50%"}
+misclassifications = which(predicted_classes != g_test)
+idx = misclassifications[1]
+plot_grayscale(mnist$test$x[idx,,])
+
+plot_grayscale(mnist$test$x[idx,,]) +
+  ggtitle(sprintf("Predicted class %d; True class %d", 
+                  predicted_classes[idx],
+                  g_test[idx]))
+```
