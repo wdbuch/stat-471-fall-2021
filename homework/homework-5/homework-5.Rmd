@@ -1,0 +1,175 @@
+---
+title: 'STAT 471: Homework 5'
+author: 'Name(s)'
+date: 'Due: December 8, 2021 at 11:59pm'
+output:
+  bookdown::pdf_document2:
+    number_sections: yes
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    highlight: haddock
+    number_sections: yes
+    theme: lumen
+    toc: no
+    toc_depth: 4
+    toc_float: yes
+urlcolor: blue
+---
+
+```{r setup, include=FALSE}
+options(scipen = 0, digits = 3)  # controls number of significant digits printed
+```
+
+# Instructions {-}
+
+## Setup {-} 
+
+Pull the latest version of this assignment from Github and set your working directory to `stat-471-fall-2021/` `homework/homework-5`. Consult the [getting started guide](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/getting-started.pdf) if you need to brush up on `R` or `Git`.
+
+## Collaboration {-}
+
+The collaboration policy is as stated on the Syllabus:
+
+>"Students are permitted to work together on homework assignments, but solutions must be written up and submitted individually. Students must disclose any sources of assistance they received; furthermore, they are prohibited from verbatim copying from any source and from consulting solutions to problems that may be available online and/or from past iterations of the course."
+
+In accordance with this policy, 
+
+*Please list anyone you discussed this homework with:* 
+
+*Please list what external references you consulted (e.g. articles, books, or websites):*
+
+## Writeup {-}
+
+Use this document as a starting point for your writeup, adding your solutions after "**Solution**". Add your R code using code chunks and add your text answers using **bold text**. Consult the [preparing reports guide](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/preparing-reports.pdf) for guidance on compilation, creation of figures and tables, and presentation quality. 
+
+## Programming {-}
+
+The `tidyverse` paradigm for data wrangling, manipulation, and visualization is strongly encouraged, but points will not be deducted for using base \texttt{R}. 
+
+We'll need to use the following R packages:
+```{r, message = FALSE}
+library(keras)         # to train neural networks
+library(kableExtra)    # to print tables
+library(cowplot)       # to print side-by-side plots
+library(tidyverse)     # tidyverse
+```
+
+We'll also need the deep learning helper functions written for STAT 471:
+```{r}
+source("../../functions/deep_learning_helpers.R")
+```
+
+## Grading {-}
+The point value for each problem sub-part is indicated. Additionally, the presentation quality of the solution for each problem (as exemplified by the guidelines in Section 3 of the [preparing reports guide](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/getting-started/preparing-reports.pdf) will be evaluated on a per-problem basis (e.g. in this homework, there are three problems).
+
+## Submission {-}
+
+Compile your writeup to PDF and submit to [Gradescope](https://www.gradescope.com/courses/285259). 
+
+# Fashion MNIST Data {-}
+
+In this homework, we will analyze the [Fashion MNIST data](https://github.com/zalandoresearch/fashion-mnist), which is like MNIST but with clothing items rather than handwritten digits. There are ten classes, as listed in Table \@ref(tab:fashion-mnist-labels).
+
+```{r fashion-mnist-labels, echo = FALSE}
+class_names = tribble(
+  ~class, ~name,
+  0, "T-shirt/top",
+  1, "Trouser",
+  2, "Pullover",
+  3, "Dress",
+  4, "Coat",
+  5, "Sandal",
+  6, "Shirt",
+  7, "Sneaker",
+  8, "Bag",
+  9, "Ankle boot"
+)
+class_names %>% kable(format = "latex", row.names = NA,
+                        booktabs = TRUE,
+                        digits = 2,
+                        col.names = c("Index",
+                                      "Name"),
+                        caption = "The ten classes in the Fashion MNIST data.") %>%
+  kable_styling(position = "center") %>%
+  kable_styling(latex_options = "HOLD_position")
+```
+
+The code provided below loads the data, and prepares it for modeling with `keras`. 
+```{r}
+# load the data
+fashion_mnist <- dataset_fashion_mnist()
+
+# extract information about the images
+num_classes = nrow(class_names)                   # number of image classes
+num_train_images = dim(fashion_mnist$train$x)[1]  # number of training images
+num_test_images = dim(fashion_mnist$test$x)[1]    # number of test images
+img_rows <- dim(fashion_mnist$train$x)[2]         # rows per image
+img_cols <- dim(fashion_mnist$train$x)[3]         # columns per image
+num_pixels = img_rows*img_cols                    # pixels per image
+max_intensity = 255                               # max pixel intensity
+
+# normalize and reshape the images
+x_train <- array_reshape(fashion_mnist$train$x/max_intensity, 
+                         c(num_train_images, img_rows, img_cols, 1))
+x_test <- array_reshape(fashion_mnist$test$x/max_intensity, 
+                        c(num_test_images, img_rows, img_cols, 1))
+
+# extract the responses from the training and test data
+g_train <- fashion_mnist$train$y
+g_test <- fashion_mnist$test$y
+
+# recode response labels using "one-hot" representation
+y_train <- to_categorical(g_train, num_classes)
+y_test <- to_categorical(g_test, num_classes)
+```
+
+# Data exploration
+
+i. How many observations in each class are there in the training data? (Kable output optional.)
+
+ii. Plot the first six training images in a $2 \times 3$ grid, each image titled with its class name from the second column of Table \@ref(tab:fashion-mnist-labels).
+
+iii. Comment on the extent to which you (a human) would have been able to successfully classify the observations plotted in part ii. Would you have had any trouble? If so, with which observations?
+
+iv. What is the human performance on this classification task? You can find it at the Fashion MNIST webpage linked above by searching for "human performance."
+
+# Model training
+
+## Multi-class logistic regression 
+
+i. Define a `keras_model_sequential` object called `model_lr` for multi-class logistic regression, and compile it using the `categorical_crossentropy` loss, the `adam` optimizer, and the `accuracy` metric.
+
+ii. Print the summary of the model. How many total parameters are there? How does this number follow from the architecture of this simple neural network?
+
+iii. Train the model for 10 epochs, using a batch size of 128, and a validation split of 20%. Save the model to "model_lr.h5" and its history to "model_lr_hist.RDS", and then set this code chunk to `eval = FALSE` to avoid recomputation. How many total stochastic gradient steps were taken while training this model, and how did you arrive at this number? Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
+
+iv. Load the model and its history from the files saved in part iii. Create a plot of the training history. Based on the shape of the validation loss curve, has any overfitting occurred during the first 10 epochs?
+
+## Fully connected neural network
+
+i. Define a `keras_model_sequential` object called `model_nn` for a fully connected neural network with three hidden layers with 256, 128, and 64 units, `relu` activations, and dropout proportions 0.4, 0.3, and 0.2, respectively. Compile it using the `categorical_crossentropy` loss, the `rmsprop` optimizer, and the `accuracy` metric.
+
+ii. Print the summary of the model. How many total parameters are there? How many parameters correspond to the connections between the second and third hidden layers? How does this number follow from the architecture of the neural network?
+
+iii. Train the model using 15 epochs, a batch size of 128, and a validation split of 0.2. Save the model to "model_nn.h5" and its history to "model_nn_hist.RDS", and then set this code chunk to `eval = FALSE` to avoid recomputation. Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
+
+iv. Load the model and its history from the files saved in part iii. Create a plot of the training history. 
+
+## Convolutional neural network
+
+i. Define a `keras_model_sequential` object called `model_cnn` for a convolutional neural network with a convolutional layer with 32 $3 \times 3$ filters, followed by a convolutional layer with 64 $3 \times 3$ filters, followed by a max-pooling step with $2 \times 2$ pool size with 25% dropout, followed by a fully-connected layer with 128 units and 50% dropout, followed by a softmax output layer. All layers except the output layer should have `relu` activations. Compile the model using the `categorical_crossentropy` loss, the `adadelta` optimizer, and the `accuracy` metric.
+
+ii. Print the summary of the model. How many total parameters are there? How many parameters correspond to the connections between the first and second convolutional layers? How does this number follow from the architecture of the neural network?
+
+iii. Train the model using 8 epochs, a batch size of 128, and a validation split of 0.2. Save the model to "model_cnn.h5" and its history to "model_cnn_hist.RDS", and then set this code chunk to `eval = FALSE` to avoid recomputation. Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
+
+iv. Load the model and its history from the files saved in part iii. Create a plot of the training history. 
+
+# Evaluation 
+
+i. Evaluate the test accuracy for each of the three trained neural network models. Output this information in a table, along with the number of layers, number of parameters, and milliseconds per stochastic gradient descent step. Also include a row in the table for human performance. Compare and contrast the three neural networks and human performance based on this table.
+
+ii. Plot confusion matrices for each of the three methods. For each method, what class gets misclassified most frequently? What is most frequent wrong label for this class?
+
+iii. Consider CNN's most frequently misclassified class. What are the three most common incorrect classifications for this class? Extract one image representing each of these three type of misclassifications, and plot these side by side (titled with their predicted labels). Would you have gotten these right?

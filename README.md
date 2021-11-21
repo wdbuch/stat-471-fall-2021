@@ -59,6 +59,6 @@ Thu 11/25 | -- | Thanksgiving break | -- | -- | --
 Tue 11/30 | 5. Deep learning | Deep learning for image processing | ISLRv2 Ch. 10.3 | TBA | --
 Thu 12/2 | 5. Deep learning | Deep learning for text processing | ISLRv2 Ch. 10.4-10.5 | TBA | --
 Tue 12/7 | 5. Deep learning | Unit 5 Review | -- | TBA | Quiz 5 in class;<br />(There was no Quiz 5 last semester.)
-Wed 12/8 | -- | -- | -- | -- | Homework 5 due at 11:59pm
+Wed 12/8 | -- | -- | -- | -- | [Homework 5](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-5/homework-5.pdf) due at 11:59pm
 Thu 12/9 | -- | Course wrap-up | -- | TBA | --
 Sun 12/19 | -- | -- | -- | -- | Final project due at 11:59pm
