@@ -142,7 +142,7 @@ i. Define a `keras_model_sequential` object called `model_lr` for multi-class lo
 
 ii. Print the summary of the model. How many total parameters are there? How does this number follow from the architecture of this simple neural network?
 
-iii. Train the model for 10 epochs, using a batch size of 128, and a validation split of 20%. Save the model to "model_lr.h5" and its history to "model_lr_hist.RDS", and then set this code chunk to `eval = FALSE` to avoid recomputation. How many total stochastic gradient steps were taken while training this model, and how did you arrive at this number? Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
+iii. Train the model for 10 epochs, using a batch size of 128, and a validation split of 20%. Save the model to `model_lr.h5` and its history to `model_lr_hist.RDS`, and then set this code chunk to `eval = FALSE` to avoid recomputation. How many total stochastic gradient steps were taken while training this model, and how did you arrive at this number? Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
 
 iv. Load the model and its history from the files saved in part iii. Create a plot of the training history. Based on the shape of the validation loss curve, has any overfitting occurred during the first 10 epochs?
 
@@ -152,7 +152,7 @@ i. Define a `keras_model_sequential` object called `model_nn` for a fully connec
 
 ii. Print the summary of the model. How many total parameters are there? How many parameters correspond to the connections between the second and third hidden layers? How does this number follow from the architecture of the neural network?
 
-iii. Train the model using 15 epochs, a batch size of 128, and a validation split of 0.2. Save the model to "model_nn.h5" and its history to "model_nn_hist.RDS", and then set this code chunk to `eval = FALSE` to avoid recomputation. Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
+iii. Train the model using 15 epochs, a batch size of 128, and a validation split of 0.2. Save the model to `model_nn.h5` and its history to `model_nn_hist.RDS`, and then set this code chunk to `eval = FALSE` to avoid recomputation. Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
 
 iv. Load the model and its history from the files saved in part iii. Create a plot of the training history. 
 
@@ -162,7 +162,7 @@ i. Define a `keras_model_sequential` object called `model_cnn` for a convolution
 
 ii. Print the summary of the model. How many total parameters are there? How many parameters correspond to the connections between the first and second convolutional layers? How does this number follow from the architecture of the neural network?
 
-iii. Train the model using 8 epochs, a batch size of 128, and a validation split of 0.2. Save the model to "model_cnn.h5" and its history to "model_cnn_hist.RDS", and then set this code chunk to `eval = FALSE` to avoid recomputation. Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
+iii. Train the model using 8 epochs, a batch size of 128, and a validation split of 0.2. Save the model to `model_cnn.h5` and its history to `model_cnn_hist.RDS`, and then set this code chunk to `eval = FALSE` to avoid recomputation. Based on the output printed during training, roughly how many milliseconds did each stochastic gradient step take?
 
 iv. Load the model and its history from the files saved in part iii. Create a plot of the training history. 
 
