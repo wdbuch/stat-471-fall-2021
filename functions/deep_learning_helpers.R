@@ -34,8 +34,13 @@ plot_grayscale = function(image_array, label = NULL, class_names = NULL){
 
 plot_confusion_matrix = function(predicted_responses, actual_responses, class_names = NULL){
   if(is.null(class_names)){
+    rotate_angle = 0
+    h_just = 0.5
     classes = sort(unique(c(predicted_responses, actual_responses)))
     class_names = tibble(class = classes, name = classes)
+  } else{
+    rotate_angle = 45
+    h_just = 0
   }
   tibble(predicted_response = predicted_responses,
          actual_response = actual_responses) %>%
@@ -59,7 +64,7 @@ plot_confusion_matrix = function(predicted_responses, actual_responses, class_na
     theme_bw() + 
     theme(panel.grid = element_blank(),
           legend.position = "none",
-          axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=0))
+          axis.text.x = element_text(angle = rotate_angle, vjust = 0.5, hjust=h_just))
 }
 
 plot_model_history = function(history){

@@ -1,0 +1,186 @@
+---
+title: 'Unit 5 Lecture 2: Neural Networks'
+date: "November 23, 2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+In this R demo, we'll be fitting fully-connected neural networks to the MNIST handwritten digit data.
+
+First let's load some libraries:
+```{r, message = FALSE}
+library(keras)     # for deep learning
+library(cowplot)   # for side-by-side plots
+library(tidyverse) # for everything else
+```
+
+Let's also load some helper functions written for this class:
+```{r}
+source("../../functions/deep_learning_helpers.R")
+```
+
+Next let's load the MNIST data and do some reshaping and rescaling:
+```{r}
+# load the data
+mnist <- dataset_mnist()
+
+# extract information about the images
+num_train_images = dim(mnist$train$x)[1]          # number of training images
+num_test_images = dim(mnist$test$x)[1]            # number of test images
+img_rows <- dim(mnist$train$x)[2]                 # rows per image
+img_cols <- dim(mnist$train$x)[3]                 # columns per image
+num_pixels = img_rows*img_cols                    # pixels per image
+num_classes = length(unique(mnist$train$y))       # number of image classes
+max_intensity = 255                               # max pixel intensity
+
+# normalize and reshape the images (NOTE: WE ACTUALLY DO NOT FLATTEN IMAGES)
+x_train <- array_reshape(mnist$train$x/max_intensity, 
+                         c(num_train_images, img_rows, img_cols, 1))
+x_test <- array_reshape(mnist$test$x/max_intensity, 
+                        c(num_test_images, img_rows, img_cols, 1))
+
+# extract the responses from the training and test data
+g_train <- mnist$train$y
+g_test <- mnist$test$y
+
+# recode response labels using "one-hot" representation
+y_train <- to_categorical(g_train, num_classes)
+y_test <- to_categorical(g_test, num_classes)
+```
+
+The `plot_grayscale` function has been upgraded to allow adding a title:
+```{r, out.width = "100%", message = FALSE}
+# plot a few of the digits
+p1 = plot_grayscale(x_train[1,,,], g_train[1])
+p2 = plot_grayscale(x_train[2,,,], g_train[2])
+p3 = plot_grayscale(x_train[3,,,], g_train[3])
+plot_grid(p1, p2, p3, nrow = 1)
+```
+
+If we had named classes, we could additionally supply a tibble of class names to `plot_grayscale()`, e.g.
+```{r}
+class_names = tribble(
+  ~class, ~name,
+  0, "zero",
+  1, "one",
+  2, "two",
+  3, "three",
+  4, "four",
+  5, "five",
+  6, "six",
+  7, "seven",
+  8, "eight",
+  9, "nine"
+)
+p1 = plot_grayscale(x_train[1,,,], g_train[1], class_names)
+p2 = plot_grayscale(x_train[2,,,], g_train[2], class_names)
+p3 = plot_grayscale(x_train[3,,,], g_train[3], class_names)
+plot_grid(p1, p2, p3, nrow = 1)
+```
+
+Next, we define a neural network model with one hidden layer with 256 units and dropout rate 0.5.
+```{r}
+model_nn = keras_model_sequential() %>%
+  layer_flatten(input_shape = c(img_rows, img_cols, 1)) %>% 
+  layer_dense(units = 256, activation = "relu") %>%
+  layer_dropout(rate = 0.5) %>%
+  layer_dense(units = 10, activation = "softmax")
+```
+NOTE: We flatten inside the model definition rather than outside of it for compatibility with convolutional neural networks (next lecture).
+
+Let's print the summary of this neural network:
+```{r}
+summary(model_nn)
+```
+
+How do we arrive at the total number of parameters in this network?
+
+To train this neural network, we must first define what loss function to use, which optimizer to use, and which metrics to track. We do this by *compiling* the model.
+```{r}
+model_nn %>% compile(loss = "categorical_crossentropy",
+                     optimizer = optimizer_adagrad(), 
+                     metrics = c("accuracy")
+                     )
+```
+
+Finally, we can train the model! We use 10 epochs, (mini-)batch size 128, and reserve 20% of our training data for validation.
+```{r, eval = FALSE}
+history = model_nn %>% 
+  fit(x_train,                  # supply training features
+      y_train,                  # supply training responses
+      epochs = 10,              # an epoch is a gradient step
+      batch_size = 128,         # we will learn about batches in Lecture 2
+      validation_split = 0.2)   # use 20% of the training data for validation
+```
+
+```{r, out.width = "100%", echo = FALSE}
+knitr::include_graphics("nn-train-history.png")
+```
+
+The number 375 represents the number of mini-batches. Why are there 375 of these? The output printed while training gives us information about the metrics on the training and validation data, as well as the time (in seconds) for each epoch and the average time (in milliseconds) for each stochastic gradient step for each epoch.
+
+Now that we've had the patience to wait for this model to train, let's go ahead and save it, along with its history, so we don't need to train it again:
+```{r, eval = FALSE}
+# save model
+save_model_hdf5(model_nn, "model_nn.h5")
+
+# save history
+saveRDS(model_nn$history$history, "model_nn_hist.RDS")
+```
+
+We can then load the model and its history into memory again:
+```{r}
+# load model
+model_nn = load_model_hdf5("model_nn.h5")
+
+# load history
+model_nn_hist = readRDS("model_nn_hist.RDS")
+```
+
+We can plot the training history using `plot_model_history()` from `deep_learning_helpers.R`:
+```{r}
+plot_model_history(model_nn_hist)
+```
+
+Did we observe any overfitting? 
+
+As before, we can get the fitted probabilities and predicted classes for the test set using `predict()` and `k_argmax()`:
+```{r}
+# get fitted probabilities
+model_nn %>% predict(x_test) %>% head()
+
+# get predicted classes
+predicted_classes = model_nn %>% predict(x_test) %>% k_argmax() %>% as.integer() 
+head(predicted_classes)
+```
+
+We can extract the misclassification error / accuracy manually:
+```{r}
+# misclassification error
+mean(predicted_classes != g_test)
+
+# accuracy
+mean(predicted_classes == g_test)
+```
+
+Or we can use a shortcut and call `evaluate`:
+```{r}
+evaluate(model_nn, x_test, y_test, verbose = FALSE)
+```
+
+In addition to the accuracy / misclassification error, we can take a look at the *confusion matrix* of this classifier using the `plot_confusion_matrix()` function in `deep_learning_helpers.R`:
+```{r, fig.align='center'}
+plot_confusion_matrix(predicted_responses = predicted_classes, 
+                      actual_response = g_test)
+```
+
+Let's take a look at an 8 that was misclassified as a 2:
+```{r, out.width = "50%"}
+misclassifications = which(predicted_classes == 2 & g_test == 8)
+idx = misclassifications[1]
+plot_grayscale(x_test[idx,,,])
+```
+
+`:O`
