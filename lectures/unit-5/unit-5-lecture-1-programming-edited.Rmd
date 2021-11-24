@@ -1,0 +1,135 @@
+---
+title: 'Unit 5 Lecture 1: Deep Learning Preliminaries'
+date: "November 18, 2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+In this R demo, we'll get warmed up for deep learning by fitting a multi-class logistic regression to the MNIST handwritten digit data. The inputs are 28 pixel by 28 pixel images of handwritten digits (a total of 784 pixels), and the output is one of the ten categories 0, 1,..., 9. 
+
+First let's load some libraries:
+```{r, message = FALSE}
+library(keras)     # for deep learning
+library(tidyverse) # for everything else
+```
+
+Let's also load some helper functions written for this class:
+```{r}
+source("../../functions/deep_learning_helpers.R")
+```
+
+Next let's load the MNIST data and do some reshaping and rescaling:
+```{r}
+# load the data
+mnist <- dataset_mnist()
+
+# extract information about the images
+num_train_images = dim(mnist$train$x)[1]          # number of training images
+num_test_images = dim(mnist$test$x)[1]            # number of test images
+img_rows <- dim(mnist$train$x)[2]                 # rows per image
+img_cols <- dim(mnist$train$x)[3]                 # columns per image
+num_pixels = img_rows*img_cols                    # pixels per image
+num_classes = length(unique(mnist$train$y))       # number of image classes
+max_intensity = 255                               # max pixel intensity
+
+# normalize and reshape the images (DO NOT FLATTEN DURING PRE-PROCESSING)
+x_train <- array_reshape(mnist$train$x/max_intensity, 
+                         c(num_train_images, img_rows, img_cols, 1))
+x_test <- array_reshape(mnist$test$x/max_intensity, 
+                        c(num_test_images, img_rows, img_cols, 1))
+
+# extract the responses from the training and test data
+g_train <- mnist$train$y
+g_test <- mnist$test$y
+
+# recode response labels using "one-hot" representation
+y_train <- to_categorical(g_train, num_classes)
+y_test <- to_categorical(g_test, num_classes)
+```
+
+Let's plot a few of the digits:
+```{r, out.width = "50%"}
+# plot a few of the digits
+p1 = plot_grayscale(x_train[1,,,], g_train[1])
+plot(p1)
+
+p2 = plot_grayscale(x_train[2,,,], g_train[2])
+plot(p2)
+
+p3 = plot_grayscale(x_train[3,,,], g_train[3])
+plot(p3)
+```
+
+Now, we can define the class of model we want to train (multi-class logistic model):
+```{r, message = FALSE}
+model_lr <- keras_model_sequential() %>%
+  layer_flatten(input_shape =            # flatten during model-building
+                  c(img_rows, img_cols, 1)) %>% 
+  layer_dense(units = num_classes,       # number of outputs
+              activation = "softmax")    # type of activation function  
+```
+
+We can get a summary of this model as follows:
+```{r}
+summary(model_lr)
+```
+
+Now we need to *compile* the model, which adds information to the object about which loss we want to use, which way we want to optimize the loss, and how we will evaluate validation error:
+```{r}
+model_lr %>%                                    # note: modifying model_lr in place
+  compile(loss = "categorical_crossentropy",   # which loss to use
+          optimizer = optimizer_rmsprop(),     # how to optimize the loss
+          metrics = c("accuracy"))             # how to evaluate the fit
+```
+
+Finally, we can train the model! Let's use a small number of epochs (gradient steps) so the run time is manageable.
+```{r}
+model_lr %>% 
+  fit(x_train,                  # supply training features
+      y_train,                  # supply training responses
+      epochs = 5,               # an epoch is a gradient step
+      batch_size = 128,         # we will learn about batches in Lecture 2
+      validation_split = 0.2)   # use 20% of the training data for validation
+```
+
+The field `model_lr$history$history` contains the progress during training, and can be plotted via
+```{r}
+# plot the history
+plot_model_history(model_lr$history$history)
+```
+
+We can get the fitted probabilities using the `predict()` function, and extract the classes with highest predicted probability using `k_argmax()`
+```{r}
+# get fitted probabilities
+model_lr %>% predict(x_test) %>% head()
+
+# get predicted classes
+predicted_classes = model_lr %>% predict(x_test) %>% k_argmax() %>% as.integer() 
+head(predicted_classes)
+```
+
+We can extract the misclassification error / accuracy manually:
+```{r}
+# misclassification error
+mean(predicted_classes != g_test)
+
+# accuracy
+mean(predicted_classes == g_test)
+```
+
+Or we can use a shortcut and call `evaluate`:
+```{r}
+evaluate(model_lr, x_test, y_test, verbose = FALSE)
+```
+
+Finally, let's take a look at one of the misclassified digits:
+```{r, out.width = "50%"}
+misclassifications = which(predicted_classes != g_test)
+idx = misclassifications[1]
+plot_grayscale(x_test[idx,,,]) +
+  ggtitle(sprintf("Predicted class %d; True class %d", 
+                  predicted_classes[idx],
+                  g_test[idx]))
+```
