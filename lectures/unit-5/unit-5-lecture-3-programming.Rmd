@@ -1,0 +1,139 @@
+---
+title: 'Unit 5 Lecture 3: Neural Networks'
+date: "November 30, 2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+In this R demo, we'll be fitting convolutional neural networks to the MNIST handwritten digit data.
+
+First let's load some libraries:
+```{r, message = FALSE}
+library(keras)     # for deep learning
+library(cowplot)   # for side-by-side plots
+library(tidyverse) # for everything else
+```
+
+Let's also load some helper functions written for this class:
+```{r}
+source("../../functions/deep_learning_helpers.R")
+```
+
+Next let's load the MNIST data and do some reshaping and rescaling:
+```{r}
+# load the data
+mnist <- dataset_mnist()
+
+# extract information about the images
+num_train_images = dim(mnist$train$x)[1]          # number of training images
+num_test_images = dim(mnist$test$x)[1]            # number of test images
+img_rows <- dim(mnist$train$x)[2]                 # rows per image
+img_cols <- dim(mnist$train$x)[3]                 # columns per image
+num_pixels = img_rows*img_cols                    # pixels per image
+num_classes = length(unique(mnist$train$y))       # number of image classes
+max_intensity = 255                               # max pixel intensity
+
+# normalize and reshape the images (NOTE: WE ACTUALLY DO NOT FLATTEN IMAGES)
+x_train <- array_reshape(mnist$train$x/max_intensity, 
+                         c(num_train_images, img_rows, img_cols, 1))
+x_test <- array_reshape(mnist$test$x/max_intensity, 
+                        c(num_test_images, img_rows, img_cols, 1))
+
+# extract the responses from the training and test data
+g_train <- mnist$train$y
+g_test <- mnist$test$y
+
+# recode response labels using "one-hot" representation
+y_train <- to_categorical(g_train, num_classes)
+y_test <- to_categorical(g_test, num_classes)
+```
+
+Next, we define a convolutional neural network model with two convolutional layers, one max pooling layer, and one dense layer.
+```{r}
+model_cnn <- keras_model_sequential() %>%
+  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu',
+                input_shape = c(img_rows, img_cols, 1)) %>% 
+  layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
+  layer_max_pooling_2d(pool_size = c(2, 2)) %>% 
+  layer_dropout(rate = 0.25) %>% 
+  layer_flatten() %>% 
+  layer_dense(units = 128, activation = 'relu') %>% 
+  layer_dropout(rate = 0.5) %>% 
+  layer_dense(units = num_classes, activation = 'softmax')
+```
+
+Let's print the summary of this neural network:
+```{r}
+summary(model_cnn)
+```
+
+How do we arrive at the total number of parameters in this network?
+
+To train this neural network, we must first define what loss function to use, which optimizer to use, and which metrics to track. We do this by *compiling* the model.
+```{r}
+model_cnn %>% compile(loss = "categorical_crossentropy",
+                     optimizer = optimizer_adadelta(), 
+                     metrics = c("accuracy")
+                     )
+```
+
+Finally, we can train the model! We use 10 epochs, (mini-)batch size 128, and reserve 20% of our training data for validation.
+```{r, eval = FALSE}
+model_cnn %>% 
+  fit(x_train,                  # supply training features
+      y_train,                  # supply training responses
+      epochs = 3,               # an epoch cycles through all mini-batches
+      batch_size = 128,         # mini-batch size
+      validation_split = 0.2)   # use 20% of the training data for validation
+```
+
+Now that we've had the patience to wait for this model to train, let's go ahead and save it, along with its history, so we don't need to train it again:
+```{r, eval = FALSE}
+# save model
+save_model_hdf5(model_cnn, "model_cnn.h5")
+
+# save history
+saveRDS(model_cnn$history$history, "model_cnn_hist.RDS")
+```
+
+We can then load the model and its history into memory again:
+```{r}
+# load model
+model_cnn = load_model_hdf5("model_cnn.h5")
+
+# load history
+model_cnn_hist = readRDS("model_cnn_hist.RDS")
+```
+
+We can plot the training history using `plot_model_history()` from `deep_learning_helpers.R`:
+```{r}
+plot_model_history(model_cnn_hist)
+```
+
+Did we observe any overfitting? 
+
+As before, we can get the fitted probabilities and predicted classes for the test set using `predict()` and `k_argmax()`:
+```{r}
+# get fitted probabilities
+model_cnn %>% predict(x_test) %>% head()
+
+# get predicted classes
+predicted_classes = model_cnn %>% predict(x_test) %>% k_argmax() %>% as.integer() 
+head(predicted_classes)
+```
+
+We can extract the misclassification error / accuracy manually:
+```{r}
+# misclassification error
+mean(predicted_classes != g_test)
+
+# accuracy
+mean(predicted_classes == g_test)
+```
+
+Or we can use a shortcut and call `evaluate`:
+```{r}
+evaluate(model_cnn, x_test, y_test, verbose = FALSE)
+```
