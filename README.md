@@ -60,5 +60,6 @@ Tue 11/30 | 5. Deep learning | Deep learning for image processing | ISLRv2 Ch. 1
 Thu 12/2 | 5. Deep learning | Deep learning for text processing | ISLRv2 Ch. 10.4-10.5 | [Class session (video)](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=c431e731-21f8-4417-8b89-ade5016677f6); [Slides (.pdf)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/unit-5/unit-5-lecture-4-slides.pdf) | --
 Tue 12/7 | 5. Deep learning | Unit 5 Review | -- | [Class session (video)](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=7e6008be-1023-49b9-971a-adf2017a8b27) | [Quiz 5](https://canvas.upenn.edu/courses/1597404/assignments/9195989) in class;<br />(There was no Quiz 5 last semester.)
 Wed 12/8 | -- | -- | -- | -- | [Homework 5](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/homework/homework-5/homework-5.pdf) due at 11:59pm
-Thu 12/9 | -- | Course wrap-up | -- | TBA | --
+Thu 12/9 | -- | Course wrap-up | -- | [Class session (video)](https://upenn.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ecf24fdf-c11f-4442-bee3-adf30179bfb1); [Slides (.pdf)](https://github.com/Katsevich-Teaching/stat-471-fall-2021/blob/main/lectures/course-wrapup.pdf) | --
 Sun 12/19 | -- | -- | -- | -- | Final project due at 11:59pm
+
